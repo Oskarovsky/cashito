@@ -1,0 +1,11 @@
+services:
+
+  postgres:
+    container_name: cashito-postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=cashito
+    ports:
+      - "5450:5432"
