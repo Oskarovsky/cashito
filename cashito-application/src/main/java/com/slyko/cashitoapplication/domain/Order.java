@@ -1,12 +1,14 @@
 package com.slyko.cashitoapplication.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Setter
 public class Order {
 
     private UUID id = UUID.randomUUID();
@@ -16,6 +18,13 @@ public class Order {
 
     public Order(List<Product> products) {
         this.products = products;
+    }
+
+    public Order(UUID id, List<Product> products, Status status, BigDecimal cost) {
+        this.id = id;
+        this.products = products;
+        this.status = status;
+        this.cost = cost;
     }
 
 
