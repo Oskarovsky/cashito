@@ -18,8 +18,10 @@ public class ProductDbAdapter implements ProductsSecondaryPort {
     }
 
     @Override
-    public Mono<Product> findProductById(UUID productId) {
-        return null;
+    public Mono<Product> findProductById(UUID id) {
+        return productReactiveRepository
+                .findById(id)
+                .map(ProductEntity::toApi);
     }
 
     @Override

@@ -10,25 +10,29 @@ import com.slyko.cashitoinfra.adapter.api.dto.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @RestController
-@RequestMapping(value = "/productTest")
+@RequestMapping(value = "/product")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductManagementPort productManagementPort;
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Mono<Product>> getProduct(@PathVariable(value = "id") UUID id) {
+        Mono<Product> productMono = productManagementPort.getProduct(id);
+        return new ResponseEntity<>(productMono, HttpStatus.OK);
+    }
+
     @PostMapping
-    public Mono<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Mono<Product>> createProduct(@RequestBody ProductRequest request) {
         Mono<Product> product = productManagementPort.createProduct(request.toDomain());
-        ResponseEntity<Mono<Product>> monoResponseEntity = new ResponseEntity<>(product, HttpStatus.OK);
-        System.out.println(monoResponseEntity);
-        return null;
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
 

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Table
@@ -18,7 +19,7 @@ public class PaymentEntity extends BaseEntity {
     LocalDate paid;
 
     public PaymentEntity(UUID id, UUID orderId, LocalDate paid) {
-        super(id);
+        super(id, LocalDateTime.now(), LocalDateTime.now());
         this.orderId = orderId;
         this.paid = paid;
     }

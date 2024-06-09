@@ -13,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class OrderEntity extends BaseEntity {
     private BigDecimal cost;
 
     public OrderEntity(UUID id, Status status, List<Product> products, BigDecimal cost) {
-        super(id);
+        super(id, LocalDateTime.now(), LocalDateTime.now());
         this.status = status;
         this.products = products;
         this.cost = cost;

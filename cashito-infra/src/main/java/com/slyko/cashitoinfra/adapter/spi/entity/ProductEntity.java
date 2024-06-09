@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Table(name = "product")
@@ -21,7 +22,7 @@ public class ProductEntity extends BaseEntity {
     private BigDecimal cost;
 
     public ProductEntity(UUID id, String name, ProductType productType, BigDecimal cost) {
-        super(id);
+        super(id, LocalDateTime.now(), LocalDateTime.now());
         this.name = name;
         this.productType = productType;
         this.cost = cost;

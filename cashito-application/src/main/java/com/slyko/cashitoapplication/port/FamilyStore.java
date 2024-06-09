@@ -51,14 +51,13 @@ public class FamilyStore implements OrderingPaymentPort, ProductManagementPort {
 
     @Override
     public Mono<Product> getProduct(UUID id) {
-        return null;
+        return productsSecondaryPort.findProductById(id);
     }
 
     @Override
     public Mono<Product> createProduct(Product product) {
         Mono<Product> product1 = productsSecondaryPort.createProduct(product);
         product1.subscribe();
-//        product1.block();
 
         return null;
     }
