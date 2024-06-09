@@ -1,23 +1,24 @@
 package com.slyko.cashitoinfra.adapter.spi;
 
 import com.slyko.cashitoapplication.domain.Payment;
-import com.slyko.cashitoapplication.port.spi.PaymentsSecondaryPort;
+import com.slyko.cashitoapplication.port.out.PaymentsSecondaryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class PaymentsStorageAdapter implements PaymentsSecondaryPort {
+public class PaymentsDbAdapter implements PaymentsSecondaryPort {
 
     @Override
-    public Payment findPaymentByOrderId(UUID orderId) {
+    public Mono<Payment> findPaymentByOrderId(UUID orderId) {
         return null;
     }
 
     @Override
-    public Payment save(Payment payment) {
+    public Mono<Payment> createPayment(Payment payment) {
         return null;
     }
 }

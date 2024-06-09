@@ -3,10 +3,8 @@ package com.slyko.cashitoinfra.adapter.spi.entity;
 import com.slyko.cashitoapplication.domain.Order;
 import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.domain.Status;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +20,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Accessors(chain = true)
-@NoArgsConstructor
-public class OrderEntity {
-
-    @Id
-    UUID id;
+public class OrderEntity extends BaseEntity {
 
     @Enumerated
     private Status status;
@@ -37,12 +31,23 @@ public class OrderEntity {
 
     private BigDecimal cost;
 
-    public Order toApi() {
-        return new Order(
-            id,
-            products,
-            status,
-            cost
+    public OrderEntity(UUID id, Status status, List<Product> products, BigDecimal cost) {
+        super(id);
+        this.status = status;
+        this.products = products;
+        this.cost = cost;
+    }
+
+    public static OrderEntity toDb(Order order) {
+        return new OrderEntity(
+            order.getId(),
+            order.getStatus(),
+            order.getProducts(),
+            order.getCost()
         );
+    }
+
+    public Order toApi() {
+        return new Order(getId(), products, status, cost);
     }
 }
