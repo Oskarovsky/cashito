@@ -49,5 +49,6 @@ public class DealsDbAdapter implements DealsSecondaryPort {
                         .then(Mono.just(savedDeal))
                 )
                 .map(DealEntity::toApi);
+
     }
 }
