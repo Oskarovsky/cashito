@@ -5,6 +5,38 @@ databaseChangeLog:
       author: slyko
       changes:
         - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR
+                  constraints:
+                    nullable: true
+              - column:
+                  name: type
+                  type: VARCHAR
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - createTable:
             tableName: order
             columns:
               - column:
@@ -16,11 +48,6 @@ databaseChangeLog:
               - column:
                   name: status
                   type: VARCHAR
-                  constraints:
-                    nullable: true
-              - column:
-                  name: cost
-                  type: DECIMAL
                   constraints:
                     nullable: true
               - column:
@@ -93,6 +120,12 @@ databaseChangeLog:
                   type: DECIMAL
                   constraints:
                     nullable: false
+              - column:
+                  name: order_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_product_order_id
+                    references: order(id)
               - column:
                   name: created_date
                   type: timestamp

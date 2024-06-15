@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(value = "/orderTest")
+@RequestMapping(value = "/order")
 @RequiredArgsConstructor
 public class OrderController {
 
@@ -23,8 +23,8 @@ public class OrderController {
     @PostMapping
     public Mono<OrderResponse> createOrder(@RequestBody OrderRequest request) {
         Mono<Order> order = orderingPaymentPort.placeOrder(request.toDomain());
-        ResponseEntity<Mono<Order>> monoResponseEntity = new ResponseEntity<>(order, HttpStatus.OK);
-        System.out.println(monoResponseEntity);
+//        ResponseEntity<Mono<Order>> monoResponseEntity = new ResponseEntity<>(order, HttpStatus.OK);
+//        System.out.println(order);
         return null;
     }
 

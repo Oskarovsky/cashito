@@ -14,17 +14,15 @@ public class Order {
     private UUID id = UUID.randomUUID();
     private final List<Product> products;
     private Status status = Status.PAYMENT_EXPECTED;
-    private BigDecimal cost;
 
     public Order(List<Product> products) {
         this.products = products;
     }
 
-    public Order(UUID id, List<Product> products, Status status, BigDecimal cost) {
+    public Order(UUID id, List<Product> products, Status status) {
         this.id = id;
         this.products = products;
         this.status = status;
-        this.cost = cost;
     }
 
 

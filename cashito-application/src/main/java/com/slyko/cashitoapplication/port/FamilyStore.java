@@ -5,10 +5,13 @@ import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.in.OrderingPaymentPort;
 import com.slyko.cashitoapplication.port.in.ProductManagementPort;
+import com.slyko.cashitoapplication.port.out.AccountsSecondaryPort;
 import com.slyko.cashitoapplication.port.out.OrdersSecondaryPort;
 import com.slyko.cashitoapplication.port.out.PaymentsSecondaryPort;
 import com.slyko.cashitoapplication.port.out.ProductsSecondaryPort;
 import com.slyko.cashitoapplication.util.UseCase;
+import reactor.core.Disposable;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
@@ -30,13 +33,10 @@ public class FamilyStore implements OrderingPaymentPort, ProductManagementPort {
         this.productsSecondaryPort = productsSecondaryPort;
     }
 
-
-
     @Override
     public Mono<Order> placeOrder(Order order) {
-
-        Mono<Order> save = ordersSecondaryPort.createOrder(order);
-        System.out.println(save.toFuture());
+        Mono<Order> savedOrder = ordersSecondaryPort.createOrder(order);
+        savedOrder.subscribe();
         return null;
     }
 
@@ -50,14 +50,19 @@ public class FamilyStore implements OrderingPaymentPort, ProductManagementPort {
     }
 
     @Override
+    public Flux<Product> getProducts() {
+        return productsSecondaryPort.findAllProducts();
+    }
+
+    @Override
     public Mono<Product> getProduct(UUID id) {
         return productsSecondaryPort.findProductById(id);
     }
 
     @Override
     public Mono<Product> createProduct(Product product) {
-        Mono<Product> product1 = productsSecondaryPort.createProduct(product);
-        product1.subscribe();
+        Mono<Product> savedProduct = productsSecondaryPort.createProduct(product);
+        savedProduct.subscribe();
 
         return null;
     }

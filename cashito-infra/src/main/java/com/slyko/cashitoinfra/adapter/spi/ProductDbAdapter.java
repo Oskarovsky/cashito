@@ -4,6 +4,7 @@ import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.out.ProductsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
@@ -15,6 +16,14 @@ public class ProductDbAdapter implements ProductsSecondaryPort {
 
     public ProductDbAdapter(ProductReactiveRepository productReactiveRepository) {
         this.productReactiveRepository = productReactiveRepository;
+    }
+
+
+    @Override
+    public Flux<Product> findAllProducts() {
+        return productReactiveRepository
+                .findAll()
+                .map(ProductEntity::toApi);
     }
 
     @Override

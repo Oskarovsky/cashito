@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Table
+@Table(name = "order")
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -26,29 +26,28 @@ public class OrderEntity extends BaseEntity {
     @Enumerated
     private Status status;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<Product> products;
+    @OneToMany(
+        mappedBy = "order",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<ProductEntity> products;
 
-    private BigDecimal cost;
-
-    public OrderEntity(UUID id, Status status, List<Product> products, BigDecimal cost) {
+    public OrderEntity(UUID id, Status status, List<ProductEntity> products) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
         this.status = status;
         this.products = products;
-        this.cost = cost;
     }
 
     public static OrderEntity toDb(Order order) {
         return new OrderEntity(
             order.getId(),
             order.getStatus(),
-            order.getProducts(),
-            order.getCost()
+            order.getProducts().stream().map(ProductEntity::toDb).toList()
         );
     }
 
     public Order toApi() {
-        return new Order(getId(), products, status, cost);
+        return new Order(getId(), products.stream().map(ProductEntity::toApi).toList(), status);
     }
 }
