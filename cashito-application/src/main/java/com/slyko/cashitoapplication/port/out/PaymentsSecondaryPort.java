@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public abstract interface PaymentsSecondaryPort {
 
-    Mono<Payment> findPaymentByOrderId(UUID orderId);
+    Mono<Payment> findPaymentByDealId(UUID dealId);
     Mono<Payment> createPayment(Payment payment);
 }

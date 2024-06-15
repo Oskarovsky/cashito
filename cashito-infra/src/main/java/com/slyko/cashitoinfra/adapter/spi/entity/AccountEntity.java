@@ -1,9 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
 import com.slyko.cashitoapplication.domain.Account;
-import com.slyko.cashitoapplication.domain.Product;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.data.relational.core.mapping.Table;

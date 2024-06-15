@@ -2,7 +2,6 @@ package com.slyko.cashitoinfra.adapter.spi.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
@@ -14,13 +13,13 @@ import java.util.UUID;
 @Setter
 public class PaymentEntity extends BaseEntity {
 
-    UUID orderId;
+    UUID dealId;
 
     LocalDate paid;
 
-    public PaymentEntity(UUID id, UUID orderId, LocalDate paid) {
+    public PaymentEntity(UUID id, UUID dealId, LocalDate paid) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
-        this.orderId = orderId;
+        this.dealId = dealId;
         this.paid = paid;
     }
 }

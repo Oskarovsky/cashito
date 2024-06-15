@@ -1,16 +1,14 @@
 package com.slyko.cashitoapplication.port;
 
-import com.slyko.cashitoapplication.domain.Order;
+import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.domain.Product;
-import com.slyko.cashitoapplication.port.in.OrderingPaymentPort;
+import com.slyko.cashitoapplication.port.in.DealPaymentPort;
 import com.slyko.cashitoapplication.port.in.ProductManagementPort;
-import com.slyko.cashitoapplication.port.out.AccountsSecondaryPort;
-import com.slyko.cashitoapplication.port.out.OrdersSecondaryPort;
+import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
 import com.slyko.cashitoapplication.port.out.PaymentsSecondaryPort;
 import com.slyko.cashitoapplication.port.out.ProductsSecondaryPort;
 import com.slyko.cashitoapplication.util.UseCase;
-import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -18,36 +16,31 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @UseCase
-public class FamilyStore implements OrderingPaymentPort, ProductManagementPort {
+public class FamilyStore implements DealPaymentPort, ProductManagementPort {
 
-    private final OrdersSecondaryPort ordersSecondaryPort;
+    private final DealsSecondaryPort dealsSecondaryPort;
     private final PaymentsSecondaryPort paymentsSecondaryPort;
     private final ProductsSecondaryPort productsSecondaryPort;
 
-    public FamilyStore(OrdersSecondaryPort ordersSecondaryPort,
+    public FamilyStore(DealsSecondaryPort dealsSecondaryPort,
                        PaymentsSecondaryPort paymentsSecondaryPort,
                        ProductsSecondaryPort productsSecondaryPort
     ) {
-        this.ordersSecondaryPort = ordersSecondaryPort;
+        this.dealsSecondaryPort = dealsSecondaryPort;
         this.paymentsSecondaryPort = paymentsSecondaryPort;
         this.productsSecondaryPort = productsSecondaryPort;
     }
 
     @Override
-    public Mono<Order> placeOrder(Order order) {
-        Mono<Order> savedOrder = ordersSecondaryPort.createOrder(order);
-        savedOrder.subscribe();
-        return null;
+    public Mono<Deal> createDeal(Deal deal) {
+        return dealsSecondaryPort.createDeal(deal);
     }
 
     @Override
-    public Mono<Payment> payOrder(UUID orderId) {
-        var order = ordersSecondaryPort.findOrderById(orderId);
-
-//        ordersSecondaryPort.save(order);
-
-        return paymentsSecondaryPort.createPayment(new Payment(orderId, LocalDate.now()));
+    public Mono<Payment> payDeal(UUID dealId) {
+        return null;
     }
+
 
     @Override
     public Flux<Product> getProducts() {

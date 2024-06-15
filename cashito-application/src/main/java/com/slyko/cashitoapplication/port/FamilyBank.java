@@ -1,29 +1,27 @@
 package com.slyko.cashitoapplication.port;
 
-import com.slyko.cashitoapplication.domain.Order;
+import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.PreparingPaymentPort;
-import com.slyko.cashitoapplication.port.out.OrdersSecondaryPort;
+import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 public class FamilyBank implements PreparingPaymentPort {
 
-    private final OrdersSecondaryPort ordersSecondaryPort;
+    private final DealsSecondaryPort dealsSecondaryPort;
 
-    public FamilyBank(OrdersSecondaryPort ordersSecondaryPort) {
-        this.ordersSecondaryPort = ordersSecondaryPort;
+    public FamilyBank(DealsSecondaryPort dealsSecondaryPort) {
+        this.dealsSecondaryPort = dealsSecondaryPort;
     }
 
     @Override
-    public Mono<Order> startPreparingOrder(UUID orderId) {
-        var order = ordersSecondaryPort.findOrderById(orderId);
+    public Mono<Deal> startPreparingDeal(UUID dealId) {
         return null;
-//        return ordersSecondaryPort.save(order.markBeingPrepared());
     }
 
     @Override
-    public Mono<Order> finishPreparingOrder(UUID orderId) {
+    public Mono<Deal> finishPreparingDeal(UUID dealId) {
         return null;
     }
 

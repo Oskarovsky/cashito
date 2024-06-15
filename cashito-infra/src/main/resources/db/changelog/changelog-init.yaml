@@ -37,7 +37,7 @@ databaseChangeLog:
                     nullable: false
 
         - createTable:
-            tableName: order
+            tableName: deal
             columns:
               - column:
                   name: id
@@ -73,11 +73,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: order_id
+                  name: deal_id
                   type: UUID
                   constraints:
-                    foreignKeyName: fk_payment_order_id
-                    references: order(id)
+                    foreignKeyName: fk_payment_deal_id
+                    references: deal(id)
               - column:
                   name: paid
                   type: DATE
@@ -121,11 +121,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: order_id
+                  name: deal_id
                   type: UUID
                   constraints:
-                    foreignKeyName: fk_product_order_id
-                    references: order(id)
+                    foreignKeyName: fk_product_deal_id
+                    references: deal(id)
               - column:
                   name: created_date
                   type: timestamp

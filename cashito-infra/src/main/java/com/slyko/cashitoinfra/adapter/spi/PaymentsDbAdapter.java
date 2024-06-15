@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PaymentsDbAdapter implements PaymentsSecondaryPort {
 
     @Override
-    public Mono<Payment> findPaymentByOrderId(UUID orderId) {
+    public Mono<Payment> findPaymentByDealId(UUID dealId) {
         return null;
     }
 

@@ -1,12 +1,8 @@
 package com.slyko.cashitoinfra.adapter.api;
 
-import com.slyko.cashitoapplication.domain.Order;
 import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.in.ProductManagementPort;
-import com.slyko.cashitoinfra.adapter.api.dto.OrderRequest;
-import com.slyko.cashitoinfra.adapter.api.dto.OrderResponse;
 import com.slyko.cashitoinfra.adapter.api.dto.ProductRequest;
-import com.slyko.cashitoinfra.adapter.api.dto.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

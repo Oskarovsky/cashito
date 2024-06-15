@@ -1,6 +1,5 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Column;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
