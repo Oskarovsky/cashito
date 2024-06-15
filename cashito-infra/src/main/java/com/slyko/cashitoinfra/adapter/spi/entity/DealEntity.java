@@ -30,16 +30,4 @@ public class DealEntity extends BaseEntity {
         this.status = status;
         this.products = products;
     }
-
-    public static DealEntity toDb(Deal deal) {
-        return new DealEntity(
-            deal.getId(),
-            deal.getStatus(),
-            deal.getProducts().stream().map(ProductEntity::toDb).toList()
-        );
-    }
-
-    public Deal toApi() {
-        return new Deal(getId(), products.stream().map(ProductEntity::toApi).toList(), status);
-    }
 }

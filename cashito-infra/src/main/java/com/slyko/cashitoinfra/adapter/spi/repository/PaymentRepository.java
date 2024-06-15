@@ -1,4 +1,4 @@
-package com.slyko.cashitoinfra.adapter.spi;
+package com.slyko.cashitoinfra.adapter.spi.repository;
 
 import com.slyko.cashitoinfra.adapter.spi.entity.PaymentEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

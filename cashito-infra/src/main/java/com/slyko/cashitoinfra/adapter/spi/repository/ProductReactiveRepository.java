@@ -1,6 +1,5 @@
-package com.slyko.cashitoinfra.adapter.spi;
+package com.slyko.cashitoinfra.adapter.spi.repository;
 
-import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.domain.ProductType;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

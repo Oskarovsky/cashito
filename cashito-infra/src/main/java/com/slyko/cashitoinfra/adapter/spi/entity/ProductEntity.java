@@ -32,12 +32,4 @@ public class ProductEntity extends BaseEntity {
         this.cost = cost;
         this.dealId = dealId;
     }
-
-    public static ProductEntity toDb(Product product) {
-        return new ProductEntity(product.id(), product.name(), product.type(), product.cost(), product.dealId());
-    }
-
-    public Product toApi() {
-        return new Product(getId(), name, productType, cost, dealId);
-    }
 }
