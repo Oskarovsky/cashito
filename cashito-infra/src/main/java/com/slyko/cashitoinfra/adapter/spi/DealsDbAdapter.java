@@ -3,8 +3,11 @@ package com.slyko.cashitoinfra.adapter.spi;
 import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
-import com.slyko.cashitoinfra.adapter.spi.entity.DealEntity;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
+import com.slyko.cashitoinfra.adapter.spi.mapper.DealMapper;
+import com.slyko.cashitoinfra.adapter.spi.mapper.ProductMapper;
+import com.slyko.cashitoinfra.adapter.spi.repository.DealReactiveRepository;
+import com.slyko.cashitoinfra.adapter.spi.repository.ProductReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -28,10 +31,10 @@ public class DealsDbAdapter implements DealsSecondaryPort {
     @Override
     public Mono<Deal> createDeal(Deal deal) {
         return dealReactiveRepository
-                .save(DealEntity.toDb(deal))
+                .save(DealMapper.toDb(deal))
                 .flatMap(savedDeal -> Flux.fromIterable(deal.getProducts())
                         .flatMap(product -> {
-                            ProductEntity productEntity = ProductEntity.toDb(product);
+                            ProductEntity productEntity = ProductMapper.toDb(product);
                             productEntity.setDealId(savedDeal.getId());
                             return productReactiveRepository
                                     .save(productEntity)
@@ -41,14 +44,14 @@ public class DealsDbAdapter implements DealsSecondaryPort {
                         .map(savedProducts -> {
                             savedDeal.setProducts(
                                     savedProducts.stream()
-                                            .map(ProductEntity::toDb)
+                                            .map(ProductMapper::toDb)
                                             .collect(Collectors.toList())
                             );
                             return savedDeal;
                         })
                         .then(Mono.just(savedDeal))
                 )
-                .map(DealEntity::toApi);
+                .map(DealMapper::toApi);
 
     }
 }

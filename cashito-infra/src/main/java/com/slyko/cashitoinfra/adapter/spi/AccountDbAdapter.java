@@ -3,6 +3,7 @@ package com.slyko.cashitoinfra.adapter.spi;
 import com.slyko.cashitoapplication.domain.Account;
 import com.slyko.cashitoapplication.port.out.AccountsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.spi.entity.AccountEntity;
+import com.slyko.cashitoinfra.adapter.spi.repository.AccountReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

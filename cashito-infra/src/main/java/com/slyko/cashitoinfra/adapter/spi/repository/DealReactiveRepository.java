@@ -1,4 +1,4 @@
-package com.slyko.cashitoinfra.adapter.spi;
+package com.slyko.cashitoinfra.adapter.spi.repository;
 
 import com.slyko.cashitoapplication.domain.Status;
 import com.slyko.cashitoinfra.adapter.spi.entity.DealEntity;
