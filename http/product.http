@@ -1,0 +1,22 @@
+### GET list of products
+GET http://localhost:8080/product
+
+
+### GET product by id
+GET http://localhost:8080/product/1
+
+
+### POST create product
+POST http://localhost:8080/product
+Content-Type: application/json
+
+{
+  "name" : "testName",
+  "productType": "MEDIA",
+  "cost": 2313.22,
+  "dealId": null
+}
+
+
+### DELETE remove product by id
+DELETE http://localhost:8080

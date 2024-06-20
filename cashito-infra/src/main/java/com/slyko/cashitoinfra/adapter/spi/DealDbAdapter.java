@@ -18,14 +18,23 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class DealsDbAdapter implements DealsSecondaryPort {
+public class DealDbAdapter implements DealsSecondaryPort {
 
     private final DealReactiveRepository dealReactiveRepository;
     private final ProductReactiveRepository productReactiveRepository;
 
     @Override
     public Mono<Deal> findDealById(UUID dealId) {
-        return null;
+        return dealReactiveRepository
+                .findById(dealId)
+                .map(DealMapper::toApi);
+    }
+
+    @Override
+    public Flux<Deal> findAll() {
+        return dealReactiveRepository
+                .findAll()
+                .map(DealMapper::toApi);
     }
 
     @Override

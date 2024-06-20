@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @UseCase
 @RequiredArgsConstructor
-public class FamilyAccount implements AccountManagementPort {
+public class AccountService implements AccountManagementPort {
 
     private final AccountsSecondaryPort accountsSecondaryPort;
 
