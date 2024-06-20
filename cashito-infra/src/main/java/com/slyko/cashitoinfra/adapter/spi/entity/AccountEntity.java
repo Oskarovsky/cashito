@@ -25,7 +25,7 @@ public class AccountEntity extends BaseEntity {
     }
 
     public static AccountEntity toDb(Account account) {
-        return new AccountEntity(account.id(), account.name(), account.type());
+        return new AccountEntity(account.getId(), account.getName(), account.getType());
     }
 
     public Account toApi() {

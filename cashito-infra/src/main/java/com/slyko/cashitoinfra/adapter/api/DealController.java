@@ -1,25 +1,35 @@
 package com.slyko.cashitoinfra.adapter.api;
 
 import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.port.in.DealPaymentPort;
+import com.slyko.cashitoapplication.port.in.DealManagementPort;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/deal")
 @RequiredArgsConstructor
 public class DealController {
 
-    private final DealPaymentPort dealPaymentPort;
+    private final DealManagementPort dealManagementPort;
+
+    @GetMapping
+    public Flux<Deal> getDeals() {
+        return dealManagementPort.getDeals();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<Deal> getDeal(@PathVariable(value = "id") UUID dealId) {
+        return dealManagementPort.getDeal(dealId);
+    }
 
     @PostMapping
     public Mono<Deal> createDeal(@RequestBody DealRequest request) {
-        return dealPaymentPort.createDeal(request.toDomain());
+        return dealManagementPort.createDeal(request.toDomain());
     }
 
 }

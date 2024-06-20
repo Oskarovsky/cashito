@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-public abstract interface PaymentRepository extends ReactiveCrudRepository<PaymentEntity, UUID> {
+public abstract interface PaymentReactiveRepository extends ReactiveCrudRepository<PaymentEntity, UUID> {
 
     Mono<PaymentEntity> findById(UUID id);
 }

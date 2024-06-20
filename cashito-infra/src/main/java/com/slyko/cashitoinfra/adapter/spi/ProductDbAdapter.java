@@ -4,6 +4,7 @@ import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.out.ProductsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.spi.mapper.ProductMapper;
 import com.slyko.cashitoinfra.adapter.spi.repository.ProductReactiveRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,14 +12,10 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class ProductDbAdapter implements ProductsSecondaryPort {
 
     private final ProductReactiveRepository productReactiveRepository;
-
-    public ProductDbAdapter(ProductReactiveRepository productReactiveRepository) {
-        this.productReactiveRepository = productReactiveRepository;
-    }
-
 
     @Override
     public Flux<Product> findAllProducts() {

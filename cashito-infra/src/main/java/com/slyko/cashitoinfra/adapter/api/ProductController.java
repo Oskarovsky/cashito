@@ -26,8 +26,8 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Mono<Product>> getProduct(@PathVariable(value = "id") UUID id) {
-        Mono<Product> productMono = productManagementPort.getProduct(id);
+    public ResponseEntity<Mono<Product>> getProduct(@PathVariable(value = "id") UUID dealId) {
+        Mono<Product> productMono = productManagementPort.getProduct(dealId);
         return new ResponseEntity<>(productMono, HttpStatus.OK);
     }
 
