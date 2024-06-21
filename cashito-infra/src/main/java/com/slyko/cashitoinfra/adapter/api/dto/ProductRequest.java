@@ -6,9 +6,9 @@ import com.slyko.cashitoapplication.domain.ProductType;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public record ProductRequest(String name, ProductType productType, BigDecimal cost, UUID dealId) {
+public record ProductRequest(String name, ProductType productType, BigDecimal cost, UUID dealId, UUID prviderId) {
 
     public Product toDomain() {
-        return new Product(UUID.randomUUID(), name, productType, cost, dealId);
+        return new Product(UUID.randomUUID(), name, productType, cost, dealId, prviderId);
     }
 }

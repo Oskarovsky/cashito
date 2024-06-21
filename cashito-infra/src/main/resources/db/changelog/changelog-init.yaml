@@ -43,6 +43,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "gen_random_uuid()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -103,13 +104,40 @@ databaseChangeLog:
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
-
+        - createTable:
+            tableName: provider
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValueComputed: "gen_random_uuid()"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
         - createTable:
             tableName: product
             columns:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "gen_random_uuid()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -134,6 +162,12 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_product_deal_id
                     references: deal(id)
+              - column:
+                  name: product_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_product_provider_id
+                    references: provider(id)
               - column:
                   name: created_date
                   type: TIMESTAMP

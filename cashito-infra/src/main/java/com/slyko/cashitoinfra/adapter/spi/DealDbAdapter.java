@@ -47,7 +47,7 @@ public class DealDbAdapter implements DealsSecondaryPort {
                             productEntity.setDealId(savedDeal.getId());
                             return productReactiveRepository
                                     .save(productEntity)
-                                    .map(savedProduct -> new Product(product.id(), product.name(), product.type(), product.cost(), savedDeal.getId()));
+                                    .map(savedProduct -> new Product(product.id(), product.name(), product.type(), product.cost(), savedDeal.getId(), product.providerId()));
                         })
                         .collectList()
                         .map(savedProducts -> {
