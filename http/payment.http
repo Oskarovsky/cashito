@@ -11,9 +11,8 @@ POST http://localhost:8080/payment
 Content-Type: application/json
 
 {
-  "dealId" : null,
-  "paid": "2023-02-02",
-  "accountId": "c63d19d8-2a65-4e77-9375-f4248f600c88"
+  "paid": "2023-02-03T12:34:56",
+  "accountId": "bf8dff14-48fe-4b5c-9195-3a710c262c61"
 }
 
 
