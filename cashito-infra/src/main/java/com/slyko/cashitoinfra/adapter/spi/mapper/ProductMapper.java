@@ -11,7 +11,8 @@ public class ProductMapper {
             db.getName(),
             db.getProductType(),
             db.getCost(),
-            db.getDealId()
+            db.getDealId(),
+            db.getProviderId()
         );
     }
 
@@ -21,7 +22,8 @@ public class ProductMapper {
             api.name(),
             api.type(),
             api.cost(),
-            api.dealId()
+            api.dealId(),
+            api.providerId()
         );
     }
 

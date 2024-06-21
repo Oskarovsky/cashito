@@ -12,7 +12,7 @@ public record DealRequest(List<ProductRequest> products) {
         return new Deal(
             UUID.randomUUID(),
             products.stream().map(ProductRequest::toDomain).toList(),
-            Status.TAKEN
+            Status.READY
         );
     }
 }

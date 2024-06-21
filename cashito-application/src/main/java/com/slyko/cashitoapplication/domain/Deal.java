@@ -23,40 +23,6 @@ public class Deal {
         this.products = products;
         this.status = status;
     }
-
-
-    public Deal markPaid() {
-        if (status != Status.PAYMENT_EXPECTED) {
-            throw new IllegalStateException("Deal is already paid");
-        }
-        status = Status.PAID;
-        return this;
-    }
-
-    public Deal markBeingPrepared() {
-        if (status != Status.PAID) {
-            throw new IllegalStateException("Deal is not paid");
-        }
-        status = Status.PREPARING;
-        return this;
-    }
-
-    public Deal markPrepared() {
-        if (status != Status.PREPARING) {
-            throw new IllegalStateException("Deal is not being prepared");
-        }
-        status = Status.READY;
-        return this;
-    }
-
-    public Deal markTaken() {
-        if (status != Status.READY) {
-            throw new IllegalStateException("Deal is not ready");
-        }
-        status = Status.TAKEN;
-        return this;
-    }
-
 }
 
 

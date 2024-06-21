@@ -1,0 +1,19 @@
+### GET list of providers
+GET http://localhost:8080/provider
+
+
+### GET provider by id
+GET http://localhost:8080/provider/1
+
+
+### POST create provider
+POST http://localhost:8080/provider
+Content-Type: application/json
+
+{
+  "name": "Orlen"
+}
+
+
+### DELETE remove provider by id
+DELETE http://localhost:8080/provider

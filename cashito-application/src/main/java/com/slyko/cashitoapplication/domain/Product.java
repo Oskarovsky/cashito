@@ -8,5 +8,6 @@ public record Product(
     String name,
     ProductType type,
     BigDecimal cost,
-    UUID dealId
+    UUID dealId,
+    UUID providerId
 ) { }
