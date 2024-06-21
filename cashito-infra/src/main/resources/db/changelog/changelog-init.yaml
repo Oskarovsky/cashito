@@ -10,6 +10,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "gen_random_uuid()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -69,6 +70,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: UUID
+                  defaultValueComputed: "gen_random_uuid()"
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -83,6 +85,12 @@ databaseChangeLog:
                   type: DATE
                   constraints:
                     nullable: false
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_payment_account_id
+                    references: account(id)
               - column:
                   name: created_date
                   type: timestamp

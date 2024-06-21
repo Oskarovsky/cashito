@@ -6,5 +6,6 @@ import java.util.UUID;
 public record Payment(
     UUID id,
     UUID dealId,
-    LocalDate paid
+    LocalDate paid,
+    UUID accountId
 ) { }
