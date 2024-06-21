@@ -48,10 +48,21 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: title
+                  type: VARCHAR
+                  constraints:
+                    nullable: true
+              - column:
                   name: status
                   type: VARCHAR
                   constraints:
                     nullable: true
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_deal_account_id
+                    references: account(id)
               - column:
                   name: created_date
                   type: timestamp

@@ -10,18 +10,18 @@ import java.util.UUID;
 @Setter
 public class Deal {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
+    private String title;
+    private Status status;
+    private UUID accountId;
     private final List<Product> products;
-    private Status status = Status.PAYMENT_EXPECTED;
 
-    public Deal(List<Product> products) {
-        this.products = products;
-    }
-
-    public Deal(UUID id, List<Product> products, Status status) {
+    public Deal(UUID id, String title, Status status, UUID accountId, List<Product> products) {
         this.id = id;
-        this.products = products;
+        this.title = title;
+        this.accountId = accountId;
         this.status = status;
+        this.products = products;
     }
 }
 

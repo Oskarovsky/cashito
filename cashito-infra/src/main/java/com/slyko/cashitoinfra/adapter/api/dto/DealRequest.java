@@ -6,13 +6,15 @@ import com.slyko.cashitoapplication.domain.Status;
 import java.util.List;
 import java.util.UUID;
 
-public record DealRequest(List<ProductRequest> products) {
+public record DealRequest(String name, UUID accountId, List<ProductRequest> products) {
 
     public Deal toDomain() {
         return new Deal(
-            UUID.randomUUID(),
-            products.stream().map(ProductRequest::toDomain).toList(),
-            Status.READY
+            null,
+            name,
+            Status.NEW,
+            accountId,
+            products.stream().map(ProductRequest::toDomain).toList()
         );
     }
 }
