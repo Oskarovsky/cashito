@@ -29,8 +29,6 @@ public class ProviderService implements ProviderManagementPort {
 
     @Override
     public Mono<Provider> createProvider(Provider provider) {
-        Mono<Provider> savedProvider = providerSecondaryPort.createProvider(provider);
-        savedProvider.subscribe();
-        return null;
+        return providerSecondaryPort.createProvider(provider);
     }
 }
