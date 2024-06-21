@@ -26,13 +26,13 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: created_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
               - column:
                   name: last_modified_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
@@ -82,7 +82,7 @@ databaseChangeLog:
                     references: deal(id)
               - column:
                   name: paid
-                  type: DATE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
@@ -93,13 +93,13 @@ databaseChangeLog:
                     references: account(id)
               - column:
                   name: created_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
               - column:
                   name: last_modified_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
@@ -136,13 +136,13 @@ databaseChangeLog:
                     references: deal(id)
               - column:
                   name: created_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
               - column:
                   name: last_modified_date
-                  type: timestamp
+                  type: TIMESTAMP
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false

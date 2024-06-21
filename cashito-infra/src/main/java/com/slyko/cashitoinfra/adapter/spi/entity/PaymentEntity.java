@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
 import com.slyko.cashitoapplication.domain.Account;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -26,14 +25,14 @@ public class PaymentEntity extends BaseEntity {
     UUID dealId;
 
     @Column(columnDefinition = "DATE")
-    LocalDate paid;
+    LocalDateTime paid;
 
     private UUID accountId;
 
     @Transient
     private Account account;
 
-    public PaymentEntity(UUID id, UUID dealId, LocalDate paid, UUID account) {
+    public PaymentEntity(UUID id, UUID dealId, LocalDateTime paid, UUID account) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
         this.dealId = dealId;
         this.paid = paid;
