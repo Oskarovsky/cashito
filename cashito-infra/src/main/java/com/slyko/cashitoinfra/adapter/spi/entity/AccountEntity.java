@@ -1,5 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
+import com.slyko.cashitoapplication.domain.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -15,9 +16,9 @@ import java.util.UUID;
 public class AccountEntity extends BaseEntity {
 
     private String name;
-    private String type;
+    private AccountType type;
 
-    public AccountEntity(UUID id, String name, String type) {
+    public AccountEntity(UUID id, String name, AccountType type) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
         this.name = name;
         this.type = type;

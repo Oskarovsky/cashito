@@ -11,9 +11,11 @@ POST http://localhost:8080/account
 Content-Type: application/json
 
 {
-  "name" : "testName2",
-  "type": "testType"
+  "name" : "slyko",
+  "type": "BUSINESS"
 }
+
+// b74d7ad3-59c2-45bf-ac44-561d25ee0b5b
 
 
 ### DELETE remove account by id
