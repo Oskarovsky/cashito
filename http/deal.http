@@ -3,4 +3,4 @@ GET http://localhost:8080/deal
 
 
 ### GET deal by id
-GET http://localhost:8080/deal/1
+GET http://localhost:8080/deal/0f370ef8-c1fc-4dab-8ed7-c63c81a4b394

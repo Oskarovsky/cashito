@@ -9,7 +9,8 @@ public class PaymentMapper {
         return new Payment(
             db.getId(),
             db.getDealId(),
-            db.getPaid()
+            db.getPaid(),
+            db.getAccountId()
         );
     }
 
@@ -17,7 +18,8 @@ public class PaymentMapper {
         return new PaymentEntity(
             api.id(),
             api.dealId(),
-            api.paid()
+            api.paid(),
+            api.accountId()
         );
     }
 }

@@ -23,8 +23,8 @@ public class DealController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Deal> getDeal(@PathVariable(value = "id") UUID dealId) {
-        return dealManagementPort.getDeal(dealId);
+    public Mono<Deal> getDeal(@PathVariable(value = "id") UUID id) {
+        return dealManagementPort.getDeal(id);
     }
 
     @PostMapping

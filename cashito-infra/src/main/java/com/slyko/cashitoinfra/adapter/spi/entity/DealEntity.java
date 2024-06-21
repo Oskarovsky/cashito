@@ -1,6 +1,5 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.domain.Status;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;

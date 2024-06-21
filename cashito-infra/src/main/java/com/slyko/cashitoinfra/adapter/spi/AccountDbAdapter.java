@@ -3,6 +3,7 @@ package com.slyko.cashitoinfra.adapter.spi;
 import com.slyko.cashitoapplication.domain.Account;
 import com.slyko.cashitoapplication.port.out.AccountsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.spi.entity.AccountEntity;
+import com.slyko.cashitoinfra.adapter.spi.mapper.AccountMapper;
 import com.slyko.cashitoinfra.adapter.spi.repository.AccountReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,20 +22,20 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
     public Flux<Account> findAllAccounts() {
         return accountReactiveRepository
                 .findAll()
-                .map(AccountEntity::toApi);
+                .map(AccountMapper::toApi);
     }
 
     @Override
     public Mono<Account> findAccountById(UUID accountId) {
         return accountReactiveRepository
                 .findById(accountId)
-                .map(AccountEntity::toApi);
+                .map(AccountMapper::toApi);
     }
 
     @Override
     public Mono<Account> createAccount(Account account) {
         return accountReactiveRepository
-                .save(AccountEntity.toDb(account))
-                .map(AccountEntity::toApi);
+                .save(AccountMapper.toDb(account))
+                .map(AccountMapper::toApi);
     }
 }

@@ -1,0 +1,21 @@
+### GET list of payments
+GET http://localhost:8080/payment
+
+
+### GET payment by id
+GET http://localhost:8080/payment/1
+
+
+### POST create payment
+POST http://localhost:8080/payment
+Content-Type: application/json
+
+{
+  "dealId" : null,
+  "paid": "2023-02-02",
+  "accountId": "c63d19d8-2a65-4e77-9375-f4248f600c88"
+}
+
+
+### DELETE remove payment by id
+DELETE http://localhost:8080
