@@ -2,6 +2,8 @@ package com.slyko.cashitoinfra.adapter.spi;
 
 import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.domain.Product;
+import com.slyko.cashitoapplication.exception.DealNotFoundException;
+import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 import com.slyko.cashitoinfra.adapter.spi.mapper.DealMapper;
@@ -28,10 +30,23 @@ public class DealDbAdapter implements DealsSecondaryPort {
     private final ProductReactiveRepository productReactiveRepository;
 
     @Override
-    public Mono<Deal> findDealById(UUID dealId) {
-        return dealReactiveRepository
-                .findById(dealId)
-                .map(DealMapper::toApi);
+    public Mono<Deal> findById(UUID dealId, Long version, boolean loadRelations) {
+        final Mono<Deal> dealMono = dealReactiveRepository.findById(dealId)
+                .switchIfEmpty(Mono.error(new DealNotFoundException(dealId)))
+                .handle((deal, sink) -> {
+                    // Optimistic locking: pre-check
+                    if (version != null && !version.equals(deal.getVersion())) {
+                        // The version are different, return an error
+                        sink.error(new UnexpectedDealVersionException(version, deal.getVersion()));
+                    } else {
+                        Deal api = DealMapper.toApi(deal);
+                        sink.next(api);
+                    }
+                });
+        // Load the related objects, if requested
+        return loadRelations
+                ? dealMono.flatMap(this::loadRelations)
+                : dealMono;
     }
 
     /**
@@ -42,8 +57,7 @@ public class DealDbAdapter implements DealsSecondaryPort {
     public Flux<Deal> findAll() {
         return dealReactiveRepository
                 .findAll()
-                .map(DealMapper::toApi)
-                .flatMap(this::loadRelations);
+                .map(DealMapper::toApi);
     }
 
     /**
@@ -54,7 +68,7 @@ public class DealDbAdapter implements DealsSecondaryPort {
      */
     @Override
     @Transactional
-    public Mono<Deal> createDeal(Deal deal) {
+    public Mono<Deal> create(Deal deal) {
         return dealReactiveRepository
                 .save(DealMapper.toDb(deal))
                 .flatMap(savedDeal -> Flux.fromIterable(deal.getProducts())

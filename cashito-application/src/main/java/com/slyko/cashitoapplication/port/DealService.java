@@ -22,13 +22,13 @@ public class DealService implements DealManagementPort {
     }
 
     @Override
-    public Mono<Deal> getDeal(UUID dealId) {
-        return dealsSecondaryPort.findDealById(dealId);
+    public Mono<Deal> getDeal(UUID dealId, Long version, boolean loadRelations) {
+        return dealsSecondaryPort.findById(dealId, version, loadRelations);
     }
 
     @Override
     public Mono<Deal> createDeal(Deal deal) {
-        return dealsSecondaryPort.createDeal(deal);
+        return dealsSecondaryPort.create(deal);
     }
 
     @Override

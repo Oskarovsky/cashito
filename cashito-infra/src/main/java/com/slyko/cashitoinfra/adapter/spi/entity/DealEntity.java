@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,9 @@ import java.util.UUID;
 @Accessors(chain = true)
 @NoArgsConstructor
 public class DealEntity extends BaseEntity {
+
+    @Version
+    private Long version;
 
     private String title;
 
@@ -36,8 +40,9 @@ public class DealEntity extends BaseEntity {
     @Transient
     private List<ProductEntity> products;
 
-    public DealEntity(UUID id, String title, Status status, UUID accountId, List<ProductEntity> products) {
+    public DealEntity(UUID id, Long version, String title, Status status, UUID accountId, List<ProductEntity> products) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
+        this.version = version;
         this.title = title;
         this.status = status;
         this.accountId = accountId;

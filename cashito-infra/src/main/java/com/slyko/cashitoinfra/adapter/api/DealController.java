@@ -10,6 +10,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping(value = "/deal")
 @RequiredArgsConstructor
@@ -22,9 +24,13 @@ public class DealController {
         return dealManagementPort.getDeals();
     }
 
-    @GetMapping("/{id}")
-    public Mono<Deal> getDeal(@PathVariable(value = "id") UUID id) {
-        return dealManagementPort.getDeal(id);
+    @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
+    public Mono<Deal> getDeal(
+            @PathVariable(value = "id") UUID id,
+            @RequestParam(value = "version", defaultValue = "0") Long version,
+            @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
+    ) {
+        return dealManagementPort.getDeal(id, version, loadRelations);
     }
 
     @PostMapping

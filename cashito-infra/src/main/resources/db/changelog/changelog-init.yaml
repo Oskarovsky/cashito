@@ -48,6 +48,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: version
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
                   name: title
                   type: VARCHAR
                   constraints:

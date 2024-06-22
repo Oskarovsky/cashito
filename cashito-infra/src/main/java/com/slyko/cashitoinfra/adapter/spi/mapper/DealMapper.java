@@ -14,6 +14,7 @@ public class DealMapper {
     public static Deal toApi(DealEntity db) {
         return new Deal(
             db.getId(),
+            db.getVersion(),
             db.getTitle(),
             db.getStatus(),
             db.getAccountId(),
@@ -32,6 +33,7 @@ public class DealMapper {
     public static DealEntity toDb(Deal api) {
         return new DealEntity(
             api.getId(),
+            api.getVersion(),
             api.getTitle(),
             api.getStatus(),
             api.getAccountId(),
