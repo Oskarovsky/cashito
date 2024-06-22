@@ -11,12 +11,13 @@ POST http://localhost:8080/product
 Content-Type: application/json
 
 {
-  "name" : "testName",
-  "productType": "MEDIA",
-  "cost": 2313.22,
-  "dealId": null
+  "name": "Product Example Update",
+  "productType": "BUSINESS",
+  "cost": 32.39,
+  "dealId": "23c36975-6c30-40de-ad36-d35ea362cf46"
 }
 
+// 23c36975-6c30-40de-ad36-d35ea362cf46
 
 ### DELETE remove product by id
 DELETE http://localhost:8080

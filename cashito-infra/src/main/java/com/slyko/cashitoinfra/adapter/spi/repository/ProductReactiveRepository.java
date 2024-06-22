@@ -15,4 +15,5 @@ public interface ProductReactiveRepository extends ReactiveCrudRepository<Produc
     Mono<ProductEntity> findById(UUID id);
 
     Flux<ProductEntity> findByProductType(ProductType productType);
+    Flux<ProductEntity> findByDealId(UUID dealId);
 }

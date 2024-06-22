@@ -11,5 +11,4 @@ import java.util.UUID;
 public interface ProviderReactiveRepository extends ReactiveCrudRepository<ProviderEntity, UUID> {
 
     Mono<ProviderEntity> findById(UUID id);
-
 }

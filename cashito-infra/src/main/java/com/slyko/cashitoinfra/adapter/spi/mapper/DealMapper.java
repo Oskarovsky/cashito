@@ -1,7 +1,13 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
 import com.slyko.cashitoapplication.domain.Deal;
+import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoinfra.adapter.spi.entity.DealEntity;
+import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DealMapper {
 
@@ -11,8 +17,16 @@ public class DealMapper {
             db.getTitle(),
             db.getStatus(),
             db.getAccountId(),
-            db.getProducts().stream().map(ProductMapper::toApi).toList()
+            convertProductsToApi(db.getProducts())
         );
+    }
+
+    private static List<Product> convertProductsToApi(List<ProductEntity> dbs) {
+        return Optional.ofNullable(dbs)
+                .map(list -> list.stream()
+                        .map(ProductMapper::toApi)
+                        .collect(Collectors.toList()))
+                .orElse(null);
     }
 
     public static DealEntity toDb(Deal api) {
@@ -21,7 +35,15 @@ public class DealMapper {
             api.getTitle(),
             api.getStatus(),
             api.getAccountId(),
-            api.getProducts().stream().map(ProductMapper::toDb).toList()
+            convertProductsToDb(api.getProducts())
         );
+    }
+
+    private static List<ProductEntity> convertProductsToDb(List<Product> apis) {
+        return Optional.ofNullable(apis)
+                .map(list -> list.stream()
+                        .map(ProductMapper::toDb)
+                        .collect(Collectors.toList()))
+                .orElse(null);
     }
 }

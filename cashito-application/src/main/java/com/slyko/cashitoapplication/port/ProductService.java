@@ -28,9 +28,6 @@ public class ProductService implements ProductManagementPort {
 
     @Override
     public Mono<Product> createProduct(Product product) {
-        Mono<Product> savedProduct = productsSecondaryPort.createProduct(product);
-        savedProduct.subscribe();
-
-        return null;
+        return productsSecondaryPort.createProduct(product);
     }
 }

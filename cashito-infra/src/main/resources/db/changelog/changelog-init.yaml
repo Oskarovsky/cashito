@@ -174,7 +174,7 @@ databaseChangeLog:
                     foreignKeyName: fk_product_deal_id
                     references: deal(id)
               - column:
-                  name: product_id
+                  name: provider_id
                   type: UUID
                   constraints:
                     foreignKeyName: fk_product_provider_id

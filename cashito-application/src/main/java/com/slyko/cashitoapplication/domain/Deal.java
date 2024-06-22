@@ -1,5 +1,6 @@
 package com.slyko.cashitoapplication.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ public class Deal {
     private String title;
     private Status status;
     private UUID accountId;
-    private final List<Product> products;
+    private List<Product> products;
 
     public Deal(UUID id, String title, Status status, UUID accountId, List<Product> products) {
         this.id = id;
