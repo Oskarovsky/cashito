@@ -1,9 +1,11 @@
 ### GET list of deals
 GET http://localhost:8080/deal
+    ?relations=true
 
 
 ### GET deal by id
-GET http://localhost:8080/deal/0f370ef8-c1fc-4dab-8ed7-c63c81a4b394
+GET http://localhost:8080/deal/2490fbac-07ef-4193-a2c1-af2aa63587f6
+    ?relations=true
 
 
 ### POST create deal
@@ -11,13 +13,13 @@ POST http://localhost:8080/deal
 Content-Type: application/json
 
 {
-  "name": "First deal",
-  "accountId": "b74d7ad3-59c2-45bf-ac44-561d25ee0b5b",
+  "name": "Test deal",
+  "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
   "products": [
     {
-      "name": "Product No. 2",
+      "name": "Towar 1",
       "productType": "HOME",
-      "cost": 30.10
+      "cost": 12.20
     }
   ]
 }

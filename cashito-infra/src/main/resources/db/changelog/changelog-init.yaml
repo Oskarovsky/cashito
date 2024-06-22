@@ -48,6 +48,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: version
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
                   name: title
                   type: VARCHAR
                   constraints:
@@ -174,7 +179,7 @@ databaseChangeLog:
                     foreignKeyName: fk_product_deal_id
                     references: deal(id)
               - column:
-                  name: product_id
+                  name: provider_id
                   type: UUID
                   constraints:
                     foreignKeyName: fk_product_provider_id

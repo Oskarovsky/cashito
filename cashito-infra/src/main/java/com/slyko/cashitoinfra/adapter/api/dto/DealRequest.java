@@ -11,6 +11,7 @@ public record DealRequest(String name, UUID accountId, List<ProductRequest> prod
     public Deal toDomain() {
         return new Deal(
             null,
+            null,
             name,
             Status.NEW,
             accountId,

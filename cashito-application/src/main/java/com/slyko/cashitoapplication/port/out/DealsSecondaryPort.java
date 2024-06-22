@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public abstract interface DealsSecondaryPort {
 
-    Mono<Deal> findDealById(UUID dealId);
+    Mono<Deal> findById(UUID dealId, Long version, boolean loadRelations);
     Flux<Deal> findAll();
-    Mono<Deal> createDeal(Deal deal);
+    Mono<Deal> create(Deal deal);
 }
