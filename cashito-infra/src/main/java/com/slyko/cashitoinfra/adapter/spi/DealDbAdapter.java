@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -91,6 +93,30 @@ public class DealDbAdapter implements DealsSecondaryPort {
                         .then(Mono.just(savedDeal))
                 )
                 .map(DealMapper::toApi);
+    }
+
+    /**
+     * Update an Item
+     * @param dealRequest to be saved
+     * @return the saved deal without the related entities
+     */
+    @Override
+    public Mono<Deal> update(Deal dealRequest) {
+        if (dealRequest.getId() == null || dealRequest.getVersion() == null) {
+            return Mono.error(new IllegalArgumentException("When updating an deal, the id and the version must be provided"));
+        }
+        return dealReactiveRepository.findById(dealRequest.getId())
+                .switchIfEmpty(Mono.error(new DealNotFoundException(dealRequest.getId())))
+                .flatMap(db -> {
+                    Optional.ofNullable(dealRequest.getTitle()).ifPresent(db::setTitle);
+                    Optional.ofNullable(dealRequest.getStatus()).ifPresent(db::setStatus);
+                    Optional.ofNullable(dealRequest.getAccountId()).ifPresent(db::setAccountId);
+                    return dealReactiveRepository.save(db);
+                })
+                .map(DealMapper::toApi);
+
+
+
     }
 
     /**

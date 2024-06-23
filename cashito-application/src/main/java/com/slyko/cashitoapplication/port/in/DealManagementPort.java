@@ -10,7 +10,8 @@ import java.util.UUID;
 public abstract interface DealManagementPort {
 
     Flux<Deal> getDeals();
-    Mono<Deal> getDeal(UUID dealId, Long version, boolean loadRelations);
+    Mono<Deal> getDealById(UUID dealId, Long version, boolean loadRelations);
     Mono<Deal> createDeal(Deal deal);
+    Mono<Deal> updateDeal(UUID id, Long version, Deal deal);
     Mono<Payment> payDeal(UUID dealId);
 }

@@ -23,3 +23,17 @@ Content-Type: application/json
     }
   ]
 }
+
+### PUT update deal
+PUT http://localhost:8080/deal/2490fbac-07ef-4193-a2c1-af2aa63587f6
+Content-Type: application/json
+If-Match: 3
+
+{
+  "id": "2490fbac-07ef-4193-a2c1-af2aa63587f6",
+  "version": 0,
+  "name": "Test deal 2",
+  "status": "DONE",
+  "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
+  "products": []
+}
