@@ -9,9 +9,8 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.UUID;
-
-import static org.springframework.web.reactive.function.server.ServerResponse.noContent;
 
 @UseCase
 @RequiredArgsConstructor
@@ -35,10 +34,13 @@ public class DealService implements DealManagementPort {
 
     @Override
     public Mono<Deal> updateDeal(UUID id, Long version, Deal deal) {
-        return dealsSecondaryPort
-                .findById(id, version, false)
-                .flatMap(dealsSecondaryPort::update);
+        if (deal.getId() != null && !Objects.equals(id.toString(), deal.getId().toString())) {
+            throw new IllegalArgumentException(
+                    "Deal id [%s] from url must be the same as body request [%s]".formatted(id, deal.getId()));
+        }
+        return dealsSecondaryPort.update(id, version, deal);
     }
+
 
     @Override
     public Mono<Payment> payDeal(UUID dealId) {

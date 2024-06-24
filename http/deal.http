@@ -25,15 +25,15 @@ Content-Type: application/json
 }
 
 ### PUT update deal
-PUT http://localhost:8080/deal/2490fbac-07ef-4193-a2c1-af2aa63587f6
+PUT http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f
 Content-Type: application/json
-If-Match: 3
+If-Match: 1
 
 {
-  "id": "2490fbac-07ef-4193-a2c1-af2aa63587f6",
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
   "version": 0,
-  "name": "Test deal 2",
-  "status": "DONE",
+  "name": "Support deal 3",
+  "status": "READY",
   "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
   "products": []
 }

@@ -31,6 +31,8 @@ public class DealDbAdapter implements DealsSecondaryPort {
     private final DealReactiveRepository dealReactiveRepository;
     private final ProductReactiveRepository productReactiveRepository;
 
+
+    // TODO fix
     @Override
     public Mono<Deal> findById(UUID dealId, Long version, boolean loadRelations) {
         final Mono<Deal> dealMono = dealReactiveRepository.findById(dealId)
@@ -101,12 +103,13 @@ public class DealDbAdapter implements DealsSecondaryPort {
      * @return the saved deal without the related entities
      */
     @Override
-    public Mono<Deal> update(Deal dealRequest) {
+    public Mono<Deal> update(UUID id, Long version, Deal dealRequest) {
         if (dealRequest.getId() == null || dealRequest.getVersion() == null) {
             return Mono.error(new IllegalArgumentException("When updating an deal, the id and the version must be provided"));
         }
-        return dealReactiveRepository.findById(dealRequest.getId())
+        return findById(id, version, false)
                 .switchIfEmpty(Mono.error(new DealNotFoundException(dealRequest.getId())))
+                .map(DealMapper::toDb)
                 .flatMap(db -> {
                     Optional.ofNullable(dealRequest.getTitle()).ifPresent(db::setTitle);
                     Optional.ofNullable(dealRequest.getStatus()).ifPresent(db::setStatus);
