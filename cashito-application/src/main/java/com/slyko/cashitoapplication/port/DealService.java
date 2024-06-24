@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @UseCase
@@ -22,7 +23,7 @@ public class DealService implements DealManagementPort {
     }
 
     @Override
-    public Mono<Deal> getDeal(UUID dealId, Long version, boolean loadRelations) {
+    public Mono<Deal> getDealById(UUID dealId, Long version, boolean loadRelations) {
         return dealsSecondaryPort.findById(dealId, version, loadRelations);
     }
 
@@ -30,6 +31,16 @@ public class DealService implements DealManagementPort {
     public Mono<Deal> createDeal(Deal deal) {
         return dealsSecondaryPort.create(deal);
     }
+
+    @Override
+    public Mono<Deal> updateDeal(UUID id, Long version, Deal deal) {
+        if (deal.getId() != null && !Objects.equals(id.toString(), deal.getId().toString())) {
+            throw new IllegalArgumentException(
+                    "Deal id [%s] from url must be the same as body request [%s]".formatted(id, deal.getId()));
+        }
+        return dealsSecondaryPort.update(id, version, deal);
+    }
+
 
     @Override
     public Mono<Payment> payDeal(UUID dealId) {

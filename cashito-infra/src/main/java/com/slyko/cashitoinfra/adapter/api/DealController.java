@@ -4,6 +4,7 @@ import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,12 +31,21 @@ public class DealController {
             @RequestParam(value = "version", defaultValue = "0") Long version,
             @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
     ) {
-        return dealManagementPort.getDeal(id, version, loadRelations);
+        return dealManagementPort.getDealById(id, version, loadRelations);
     }
 
     @PostMapping
     public Mono<Deal> createDeal(@RequestBody DealRequest request) {
-        return dealManagementPort.createDeal(request.toDomain());
+        return dealManagementPort.createDeal(request.toDomainCreate());
+    }
+
+    @PutMapping(value = "/{id}")
+    public Mono<Deal> update(
+            @PathVariable final UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final DealRequest request
+    ) {
+        return dealManagementPort.updateDeal(id, version, request.toDomainUpdate());
     }
 
 }

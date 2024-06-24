@@ -11,4 +11,5 @@ public abstract interface DealsSecondaryPort {
     Mono<Deal> findById(UUID dealId, Long version, boolean loadRelations);
     Flux<Deal> findAll();
     Mono<Deal> create(Deal deal);
+    Mono<Deal> update(UUID id, Long version, Deal deal);
 }

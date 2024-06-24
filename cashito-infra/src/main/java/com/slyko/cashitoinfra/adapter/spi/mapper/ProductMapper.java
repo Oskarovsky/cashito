@@ -3,6 +3,11 @@ package com.slyko.cashitoinfra.adapter.spi.mapper;
 import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 public class ProductMapper {
 
     public static Product toApi(ProductEntity db) {
@@ -25,6 +30,16 @@ public class ProductMapper {
             api.dealId(),
             api.providerId()
         );
+    }
+
+    public static Collection<UUID> extractTagIdsFromTags(Collection<Product> products) {
+        if (products == null) {
+            return new LinkedHashSet<>();
+        }
+
+        return products.stream()
+                .map(Product::id)
+                .collect(Collectors.toSet());
     }
 
 }

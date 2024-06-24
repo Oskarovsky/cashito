@@ -23,3 +23,17 @@ Content-Type: application/json
     }
   ]
 }
+
+### PUT update deal
+PUT http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f
+Content-Type: application/json
+If-Match: 1
+
+{
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "version": 0,
+  "name": "Support deal 3",
+  "status": "READY",
+  "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
+  "products": []
+}
