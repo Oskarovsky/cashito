@@ -2,6 +2,7 @@ package com.slyko.cashitoinfra.adapter.api;
 
 import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
+import com.slyko.cashitoinfra.adapter.api.dto.DealProductsRequest;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
 import com.slyko.cashitoinfra.adapter.api.dto.DealStatusRequest;
 import lombok.RequiredArgsConstructor;
@@ -29,10 +30,9 @@ public class DealController {
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public Mono<Deal> getDeal(
             @PathVariable(value = "id") UUID id,
-            @RequestParam(value = "version", defaultValue = "0") Long version,
             @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
     ) {
-        return dealManagementPort.getDealById(id, version, loadRelations);
+        return dealManagementPort.getDealById(id, null, loadRelations);
     }
 
     @PostMapping
@@ -58,13 +58,13 @@ public class DealController {
         return dealManagementPort.updateDeal(id, version, request.toDomain());
     }
 
-    // TODO
     @PostMapping(value = "/{id}/relationships/products")
     public Mono<Deal> addNewProducts(
             @PathVariable final UUID id,
-            @RequestBody final DealRequest request
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final DealProductsRequest request
     ) {
-        return null;
+        return dealManagementPort.updateDealProducts(id, version, request.toDomain());
     }
 
 }
