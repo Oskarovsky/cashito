@@ -97,6 +97,7 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_payment_deal_id
                     references: deal(id)
+                    nullable: false
               - column:
                   name: paid
                   type: TIMESTAMP
