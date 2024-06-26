@@ -3,6 +3,7 @@ package com.slyko.cashitoinfra.adapter.api;
 import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
+import com.slyko.cashitoinfra.adapter.api.dto.DealStatusRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,24 @@ public class DealController {
             @RequestBody final DealRequest request
     ) {
         return dealManagementPort.updateDeal(id, version, request.toDomainUpdate());
+    }
+
+    @PatchMapping(value = "/{id}/status")
+    public Mono<Deal> updateStatus(
+            @PathVariable final UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final DealStatusRequest request
+    ) {
+        return dealManagementPort.updateDeal(id, version, request.toDomain());
+    }
+
+    // TODO
+    @PostMapping(value = "/{id}/relationships/products")
+    public Mono<Deal> addNewProducts(
+            @PathVariable final UUID id,
+            @RequestBody final DealRequest request
+    ) {
+        return null;
     }
 
 }

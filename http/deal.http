@@ -37,3 +37,24 @@ If-Match: 1
   "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
   "products": []
 }
+
+### PATCH change status of deal
+PATCH http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/status
+Content-Type: application/json
+If-Match: 3
+
+{
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "version": 1,
+  "status": "NEW"
+}
+
+### POST add new products to deal
+POST http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/relationships/products
+Content-Type: application/json
+
+{
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "version": 0,
+  "products": []
+}
