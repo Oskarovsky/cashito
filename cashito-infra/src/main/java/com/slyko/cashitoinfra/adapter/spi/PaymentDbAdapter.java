@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi;
 
-import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.port.out.PaymentsSecondaryPort;
+import com.slyko.cashitodomain.domain.Payment;
 import com.slyko.cashitoinfra.adapter.spi.mapper.PaymentMapper;
 import com.slyko.cashitoinfra.adapter.spi.repository.PaymentReactiveRepository;
 import lombok.RequiredArgsConstructor;

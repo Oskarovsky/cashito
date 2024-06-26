@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import com.slyko.cashitoapplication.domain.Account;
+import com.slyko.cashitodomain.domain.Account;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

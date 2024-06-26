@@ -1,10 +1,9 @@
 package com.slyko.cashitoapplication.port;
 
-import com.slyko.cashitoapplication.domain.Product;
-import com.slyko.cashitoapplication.domain.Provider;
 import com.slyko.cashitoapplication.port.in.ProviderManagementPort;
 import com.slyko.cashitoapplication.port.out.ProviderSecondaryPort;
 import com.slyko.cashitoapplication.util.UseCase;
+import com.slyko.cashitodomain.domain.Provider;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,7 +1,8 @@
 package com.slyko.cashitoinfra.adapter.api.dto;
 
-import com.slyko.cashitoapplication.domain.Product;
-import com.slyko.cashitoapplication.domain.ProductType;
+
+import com.slyko.cashitodomain.domain.Product;
+import com.slyko.cashitodomain.domain.ProductType;
 
 import java.math.BigDecimal;
 import java.util.UUID;

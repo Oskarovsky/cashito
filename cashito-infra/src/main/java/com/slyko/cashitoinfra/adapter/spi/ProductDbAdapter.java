@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi;
 
-import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.out.ProductsSecondaryPort;
+import com.slyko.cashitodomain.domain.Product;
 import com.slyko.cashitoinfra.adapter.spi.mapper.ProductMapper;
 import com.slyko.cashitoinfra.adapter.spi.repository.ProductReactiveRepository;
 import lombok.RequiredArgsConstructor;

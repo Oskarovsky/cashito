@@ -1,6 +1,7 @@
 package com.slyko.cashitoinfra.adapter.api.dto;
 
-import com.slyko.cashitoapplication.domain.Payment;
+
+import com.slyko.cashitodomain.domain.Payment;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

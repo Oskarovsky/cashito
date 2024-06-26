@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.api;
 
-import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.port.in.PaymentManagementPort;
+import com.slyko.cashitodomain.domain.Payment;
 import com.slyko.cashitoinfra.adapter.api.dto.PaymentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

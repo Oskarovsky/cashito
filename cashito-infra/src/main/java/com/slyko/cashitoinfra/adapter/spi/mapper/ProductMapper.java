@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
-import com.slyko.cashitoapplication.domain.Product;
+import com.slyko.cashitodomain.domain.Product;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 
 import java.util.Collection;

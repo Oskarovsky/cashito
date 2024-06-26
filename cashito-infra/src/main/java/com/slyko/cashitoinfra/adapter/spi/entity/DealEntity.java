@@ -1,14 +1,12 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import com.slyko.cashitoapplication.domain.Account;
-import com.slyko.cashitoapplication.domain.Status;
-import jakarta.persistence.Entity;
+import com.slyko.cashitodomain.domain.Account;
+import com.slyko.cashitodomain.domain.Status;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;

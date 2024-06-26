@@ -1,4 +1,4 @@
-package com.slyko.cashitoapplication.domain;
+package com.slyko.cashitodomain.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

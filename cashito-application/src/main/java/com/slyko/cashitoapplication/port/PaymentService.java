@@ -1,9 +1,9 @@
 package com.slyko.cashitoapplication.port;
 
-import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.port.in.PaymentManagementPort;
 import com.slyko.cashitoapplication.port.out.PaymentsSecondaryPort;
 import com.slyko.cashitoapplication.util.UseCase;
+import com.slyko.cashitodomain.domain.Payment;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

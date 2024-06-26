@@ -1,7 +1,8 @@
 package com.slyko.cashitoinfra.adapter.api.dto;
 
-import com.slyko.cashitoapplication.domain.Account;
-import com.slyko.cashitoapplication.domain.AccountType;
+
+import com.slyko.cashitodomain.domain.Account;
+import com.slyko.cashitodomain.domain.AccountType;
 
 public record AccountRequest(
     String name,

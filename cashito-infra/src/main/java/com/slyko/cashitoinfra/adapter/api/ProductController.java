@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.api;
 
-import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.port.in.ProductManagementPort;
+import com.slyko.cashitodomain.domain.Product;
 import com.slyko.cashitoinfra.adapter.api.dto.ProductRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

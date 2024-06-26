@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
-import com.slyko.cashitoapplication.domain.Account;
+import com.slyko.cashitodomain.domain.Account;
 import com.slyko.cashitoinfra.adapter.spi.entity.AccountEntity;
 
 public class AccountMapper {

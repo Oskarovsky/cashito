@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
-import com.slyko.cashitoapplication.domain.Provider;
+import com.slyko.cashitodomain.domain.Provider;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProviderEntity;
 
 public class ProviderMapper {

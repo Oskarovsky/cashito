@@ -1,7 +1,7 @@
 package com.slyko.cashitoapplication.port.in;
 
-import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.domain.Payment;
+import com.slyko.cashitodomain.domain.Deal;
+import com.slyko.cashitodomain.domain.Payment;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

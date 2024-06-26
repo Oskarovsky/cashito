@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.api;
 
-import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
+import com.slyko.cashitodomain.domain.Deal;
 import com.slyko.cashitoinfra.adapter.api.dto.DealProductsRequest;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
 import com.slyko.cashitoinfra.adapter.api.dto.DealStatusRequest;

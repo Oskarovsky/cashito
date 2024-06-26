@@ -1,4 +1,4 @@
-package com.slyko.cashitoapplication.domain;
+package com.slyko.cashitodomain.domain;
 
 public enum Status {
     PAYMENT_EXPECTED,  

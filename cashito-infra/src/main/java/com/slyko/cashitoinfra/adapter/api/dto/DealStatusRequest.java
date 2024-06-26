@@ -1,7 +1,8 @@
 package com.slyko.cashitoinfra.adapter.api.dto;
 
-import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.domain.Status;
+
+import com.slyko.cashitodomain.domain.Deal;
+import com.slyko.cashitodomain.domain.Status;
 
 import java.util.UUID;
 

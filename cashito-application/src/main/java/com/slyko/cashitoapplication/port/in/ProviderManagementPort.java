@@ -1,6 +1,6 @@
 package com.slyko.cashitoapplication.port.in;
 
-import com.slyko.cashitoapplication.domain.Provider;
+import com.slyko.cashitodomain.domain.Provider;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

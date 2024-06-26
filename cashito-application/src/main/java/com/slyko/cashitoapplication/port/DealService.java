@@ -1,10 +1,10 @@
 package com.slyko.cashitoapplication.port;
 
-import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.domain.Payment;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
 import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
 import com.slyko.cashitoapplication.util.UseCase;
+import com.slyko.cashitodomain.domain.Deal;
+import com.slyko.cashitodomain.domain.Payment;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

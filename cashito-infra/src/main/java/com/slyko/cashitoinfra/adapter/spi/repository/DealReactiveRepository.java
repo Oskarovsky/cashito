@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.repository;
 
-import com.slyko.cashitoapplication.domain.Status;
+import com.slyko.cashitodomain.domain.Status;
 import com.slyko.cashitoinfra.adapter.spi.entity.DealEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;

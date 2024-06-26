@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
-import com.slyko.cashitoapplication.domain.Payment;
+import com.slyko.cashitodomain.domain.Payment;
 import com.slyko.cashitoinfra.adapter.spi.entity.PaymentEntity;
 
 public class PaymentMapper {

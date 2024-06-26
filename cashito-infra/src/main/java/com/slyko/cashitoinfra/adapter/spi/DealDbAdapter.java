@@ -1,9 +1,9 @@
 package com.slyko.cashitoinfra.adapter.spi;
 
-import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
+import com.slyko.cashitodomain.domain.Deal;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 import com.slyko.cashitoinfra.adapter.spi.mapper.DealMapper;
 import com.slyko.cashitoinfra.adapter.spi.mapper.ProductMapper;

@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import com.slyko.cashitoapplication.domain.AccountType;
+import com.slyko.cashitodomain.domain.AccountType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

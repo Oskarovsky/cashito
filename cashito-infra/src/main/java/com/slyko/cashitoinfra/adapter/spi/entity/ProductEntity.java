@@ -1,9 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi.entity;
 
-import com.slyko.cashitoapplication.domain.Payment;
-import com.slyko.cashitoapplication.domain.Product;
-import com.slyko.cashitoapplication.domain.ProductType;
-import com.slyko.cashitoapplication.domain.Provider;
+import com.slyko.cashitodomain.domain.ProductType;
+import com.slyko.cashitodomain.domain.Provider;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

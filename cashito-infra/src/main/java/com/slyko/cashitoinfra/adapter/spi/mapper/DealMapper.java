@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.spi.mapper;
 
-import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.domain.Product;
+import com.slyko.cashitodomain.domain.Deal;
+import com.slyko.cashitodomain.domain.Product;
 import com.slyko.cashitoinfra.adapter.spi.entity.DealEntity;
 import com.slyko.cashitoinfra.adapter.spi.entity.ProductEntity;
 

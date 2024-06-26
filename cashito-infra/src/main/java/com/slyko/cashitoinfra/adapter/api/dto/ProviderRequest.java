@@ -1,6 +1,7 @@
 package com.slyko.cashitoinfra.adapter.api.dto;
 
-import com.slyko.cashitoapplication.domain.Provider;
+
+import com.slyko.cashitodomain.domain.Provider;
 
 public record ProviderRequest(String name) {
 
