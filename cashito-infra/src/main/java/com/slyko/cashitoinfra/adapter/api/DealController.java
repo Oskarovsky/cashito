@@ -2,7 +2,9 @@ package com.slyko.cashitoinfra.adapter.api;
 
 import com.slyko.cashitoapplication.domain.Deal;
 import com.slyko.cashitoapplication.port.in.DealManagementPort;
+import com.slyko.cashitoinfra.adapter.api.dto.DealProductsRequest;
 import com.slyko.cashitoinfra.adapter.api.dto.DealRequest;
+import com.slyko.cashitoinfra.adapter.api.dto.DealStatusRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +30,9 @@ public class DealController {
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public Mono<Deal> getDeal(
             @PathVariable(value = "id") UUID id,
-            @RequestParam(value = "version", defaultValue = "0") Long version,
             @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
     ) {
-        return dealManagementPort.getDealById(id, version, loadRelations);
+        return dealManagementPort.getDealById(id, null, loadRelations);
     }
 
     @PostMapping
@@ -46,6 +47,24 @@ public class DealController {
             @RequestBody final DealRequest request
     ) {
         return dealManagementPort.updateDeal(id, version, request.toDomainUpdate());
+    }
+
+    @PatchMapping(value = "/{id}/status")
+    public Mono<Deal> updateStatus(
+            @PathVariable final UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final DealStatusRequest request
+    ) {
+        return dealManagementPort.updateDeal(id, version, request.toDomain());
+    }
+
+    @PostMapping(value = "/{id}/relationships/products")
+    public Mono<Deal> addNewProducts(
+            @PathVariable final UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final DealProductsRequest request
+    ) {
+        return dealManagementPort.updateDealProducts(id, version, request.toDomain());
     }
 
 }

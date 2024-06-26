@@ -41,6 +41,15 @@ public class DealService implements DealManagementPort {
         return dealsSecondaryPort.update(id, version, deal);
     }
 
+    @Override
+    public Mono<Deal> updateDealProducts(UUID id, Long version, Deal deal) {
+        if (deal.getId() != null && !Objects.equals(id.toString(), deal.getId().toString())) {
+            throw new IllegalArgumentException(
+                    "Deal id [%s] from url must be the same as body request [%s]".formatted(id, deal.getId()));
+        }
+        return dealsSecondaryPort.updateDealProducts(id, version, deal);
+    }
+
 
     @Override
     public Mono<Payment> payDeal(UUID dealId) {

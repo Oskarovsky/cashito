@@ -1,7 +1,6 @@
 package com.slyko.cashitoinfra.adapter.spi;
 
 import com.slyko.cashitoapplication.domain.Deal;
-import com.slyko.cashitoapplication.domain.Product;
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitoapplication.port.out.DealsSecondaryPort;
@@ -17,10 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +29,6 @@ public class DealDbAdapter implements DealsSecondaryPort {
     private final ProductReactiveRepository productReactiveRepository;
 
 
-    // TODO fix
     @Override
     public Mono<Deal> findById(UUID dealId, Long version, boolean loadRelations) {
         final Mono<Deal> dealMono = dealReactiveRepository.findById(dealId)
@@ -99,27 +95,57 @@ public class DealDbAdapter implements DealsSecondaryPort {
 
     /**
      * Update an Item
-     * @param dealRequest to be saved
+     * @param dealApi to be saved
      * @return the saved deal without the related entities
      */
     @Override
-    public Mono<Deal> update(UUID id, Long version, Deal dealRequest) {
-        if (dealRequest.getId() == null || dealRequest.getVersion() == null) {
+    public Mono<Deal> update(UUID id, Long version, Deal dealApi) {
+        if (dealApi.getId() == null || dealApi.getVersion() == null) {
             return Mono.error(new IllegalArgumentException("When updating an deal, the id and the version must be provided"));
         }
         return findById(id, version, false)
-                .switchIfEmpty(Mono.error(new DealNotFoundException(dealRequest.getId())))
+                .switchIfEmpty(Mono.error(new DealNotFoundException(dealApi.getId())))
                 .map(DealMapper::toDb)
                 .flatMap(db -> {
-                    Optional.ofNullable(dealRequest.getTitle()).ifPresent(db::setTitle);
-                    Optional.ofNullable(dealRequest.getStatus()).ifPresent(db::setStatus);
-                    Optional.ofNullable(dealRequest.getAccountId()).ifPresent(db::setAccountId);
+                    Optional.ofNullable(dealApi.getTitle()).ifPresent(db::setTitle);
+                    Optional.ofNullable(dealApi.getStatus()).ifPresent(db::setStatus);
+                    Optional.ofNullable(dealApi.getAccountId()).ifPresent(db::setAccountId);
                     return dealReactiveRepository.save(db);
                 })
                 .map(DealMapper::toApi);
 
 
 
+    }
+
+    @Override
+    public Mono<Deal> updateDealProducts(UUID id, Long version, Deal dealApi) {
+        if (dealApi.getId() == null || dealApi.getVersion() == null) {
+            return Mono.error(new IllegalArgumentException("When updating an deal, the id and the version must be provided"));
+        }
+        return findById(id, version, false)
+                .switchIfEmpty(Mono.error(new DealNotFoundException(dealApi.getId())))
+                .map(DealMapper::toDb)
+                .flatMap(dealDb -> Flux.fromIterable(dealApi.getProducts())
+                        .flatMap(newProduct -> {
+                            ProductEntity productEntity = ProductMapper.toDb(newProduct);
+                            productEntity.setDealId(dealDb.getId());
+                            return productReactiveRepository
+                                    .save(productEntity)
+                                    .map(ProductMapper::toApi);
+                        })
+                        .collectList()
+                        .map(savedProducts -> {
+                            dealDb.setProducts(
+                                    savedProducts.stream()
+                                            .map(ProductMapper::toDb)
+                                            .toList()
+                            );
+                            return dealDb;
+                        })
+                        .then(Mono.just(dealDb))
+                )
+                .map(DealMapper::toApi);
     }
 
     /**

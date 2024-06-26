@@ -13,5 +13,6 @@ public abstract interface DealManagementPort {
     Mono<Deal> getDealById(UUID dealId, Long version, boolean loadRelations);
     Mono<Deal> createDeal(Deal deal);
     Mono<Deal> updateDeal(UUID id, Long version, Deal deal);
+    Mono<Deal> updateDealProducts(UUID id, Long version, Deal deal);
     Mono<Payment> payDeal(UUID dealId);
 }

@@ -4,7 +4,7 @@ GET http://localhost:8080/deal
 
 
 ### GET deal by id
-GET http://localhost:8080/deal/2490fbac-07ef-4193-a2c1-af2aa63587f6
+GET http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f
     ?relations=true
 
 
@@ -36,4 +36,37 @@ If-Match: 1
   "status": "READY",
   "accountId": "cd05f64c-2c39-49fe-ab33-b83613aeef2e",
   "products": []
+}
+
+### PATCH change status of deal
+PATCH http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/status
+Content-Type: application/json
+If-Match: 3
+
+{
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "version": 1,
+  "status": "NEW"
+}
+
+### POST add new products to deal
+POST http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/relationships/products
+Content-Type: application/json
+If-Match: 4
+
+{
+  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "version": 0,
+  "products": [
+    {
+      "name": "Nowy Towar 1",
+      "productType": "CAR",
+      "cost": 33.20
+    },
+    {
+      "name": "Nowy Towar 1",
+      "productType": "HOME",
+      "cost": 63.20
+    }
+  ]
 }
