@@ -10,8 +10,7 @@ public class PaymentMapper {
             db.getId(),
             db.getDealId(),
             db.getPaid(),
-            db.getAccountId(),
-            db.getCreatedDate()
+            db.getAccountId()
         );
     }
 

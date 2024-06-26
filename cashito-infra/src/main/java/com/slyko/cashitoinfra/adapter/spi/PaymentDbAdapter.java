@@ -25,9 +25,16 @@ public class PaymentDbAdapter implements PaymentsSecondaryPort {
     }
 
     @Override
-    public Mono<Payment> findPaymentByDealId(UUID dealId) {
+    public Mono<Payment> findById(UUID id) {
         return paymentReactiveRepository
-                .findById(dealId)
+                .findById(id)
+                .map(PaymentMapper::toApi);
+    }
+
+    @Override
+    public Flux<Payment> findPaymentsByDealId(UUID dealId) {
+        return paymentReactiveRepository
+                .findByDealId(dealId)
                 .map(PaymentMapper::toApi);
     }
 

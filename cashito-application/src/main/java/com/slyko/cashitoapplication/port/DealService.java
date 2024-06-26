@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -48,6 +49,11 @@ public class DealService implements DealManagementPort {
                     "Deal id [%s] from url must be the same as body request [%s]".formatted(id, deal.getId()));
         }
         return dealsSecondaryPort.updateDealProducts(id, version, deal);
+    }
+
+    @Override
+    public Mono<BigDecimal> getDealCost(UUID id) {
+        return dealsSecondaryPort.getDealCost(id);
     }
 
 

@@ -23,7 +23,7 @@ public class PaymentService implements PaymentManagementPort {
 
     @Override
     public Mono<Payment> getPayment(UUID id) {
-        return paymentsSecondaryPort.findPaymentByDealId(id);
+        return paymentsSecondaryPort.findById(id);
     }
 
     @Override

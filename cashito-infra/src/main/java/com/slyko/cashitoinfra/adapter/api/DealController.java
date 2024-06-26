@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -65,6 +66,13 @@ public class DealController {
             @RequestBody final DealProductsRequest request
     ) {
         return dealManagementPort.updateDealProducts(id, version, request.toDomain());
+    }
+
+    @GetMapping(value = "{id}/cost")
+    public Mono<BigDecimal> getDealCost(
+            @PathVariable final UUID id
+    ) {
+        return dealManagementPort.getDealCost(id);
     }
 
 }

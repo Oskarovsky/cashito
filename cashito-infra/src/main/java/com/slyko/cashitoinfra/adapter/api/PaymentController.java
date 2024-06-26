@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping(value = "/payment")
 @RequiredArgsConstructor
@@ -20,6 +22,12 @@ public class PaymentController {
     @ResponseStatus(HttpStatus.OK)
     public Flux<Payment> getPayments() {
         return paymentManagementPort.getPayments();
+    }
+
+    @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<Payment> getPayments(@PathVariable UUID id) {
+        return paymentManagementPort.getPayment(id);
     }
 
     @PostMapping

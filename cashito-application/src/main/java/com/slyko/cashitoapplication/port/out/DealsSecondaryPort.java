@@ -4,6 +4,7 @@ import com.slyko.cashitoapplication.domain.Deal;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public abstract interface DealsSecondaryPort {
@@ -13,4 +14,5 @@ public abstract interface DealsSecondaryPort {
     Mono<Deal> create(Deal deal);
     Mono<Deal> update(UUID id, Long version, Deal deal);
     Mono<Deal> updateDealProducts(UUID id, Long version, Deal deal);
+    Mono<BigDecimal> getDealCost(UUID id);
 }

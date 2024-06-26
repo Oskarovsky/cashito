@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -146,6 +147,16 @@ public class DealDbAdapter implements DealsSecondaryPort {
                         .then(Mono.just(dealDb))
                 )
                 .map(DealMapper::toApi);
+    }
+
+    @Override
+    public Mono<BigDecimal> getDealCost(UUID id) {
+        return findById(id, null, true)
+                .switchIfEmpty(Mono.error(new DealNotFoundException(id)))
+                .map(DealMapper::toDb)
+                .flatMap(dealDb -> Flux.fromIterable(dealDb.getProducts())
+                        .map(ProductEntity::getCost)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
     /**
