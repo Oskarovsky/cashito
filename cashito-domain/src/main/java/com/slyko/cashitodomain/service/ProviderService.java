@@ -1,4 +1,4 @@
-package com.slyko.cashitodomain;
+package com.slyko.cashitodomain.service;
 
 import com.slyko.cashitodomain.port.in.ProviderManagementPort;
 import com.slyko.cashitodomain.port.out.ProviderSecondaryPort;
