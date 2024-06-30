@@ -11,4 +11,5 @@ public abstract interface ProductManagementPort {
     Flux<Product> getProducts();
     Mono<Product> getProduct(UUID id);
     Mono<Product> createProduct(Product product);
+    Mono<Void> deleteProduct(UUID id);
 }

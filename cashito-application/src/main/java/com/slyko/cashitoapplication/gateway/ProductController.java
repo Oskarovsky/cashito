@@ -4,6 +4,7 @@ import com.slyko.cashitoapplication.request.ProductRequest;
 import com.slyko.cashitodomain.port.in.ProductManagementPort;
 import com.slyko.cashitodomain.model.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
+
+import static org.springframework.http.ResponseEntity.noContent;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -38,5 +41,12 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<ResponseEntity<Void>> deleteProduct(@PathVariable UUID id) {
+        return productManagementPort
+                .deleteProduct(id)
+                .then(Mono.fromCallable(() -> noContent().build()));
+    }
 
 }

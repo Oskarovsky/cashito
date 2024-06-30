@@ -54,7 +54,7 @@ public class DealController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<ResponseEntity<Void>> deleteDeal(
             @PathVariable UUID id,
             @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version) {
@@ -62,6 +62,7 @@ public class DealController {
                 .deleteDeal(id, version)
                 .then(Mono.fromCallable(() -> noContent().build()));
     }
+
     @PatchMapping(value = "/{id}/status")
     public Mono<Deal> updateStatus(
             @PathVariable final UUID id,

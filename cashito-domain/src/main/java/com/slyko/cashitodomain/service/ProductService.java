@@ -30,4 +30,9 @@ public class ProductService implements ProductManagementPort {
     public Mono<Product> createProduct(Product product) {
         return productsSecondaryPort.createProduct(product);
     }
+
+    @Override
+    public Mono<Void> deleteProduct(UUID id) {
+        return productsSecondaryPort.deleteProduct(id);
+    }
 }
