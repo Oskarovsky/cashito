@@ -11,6 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Account {
     private UUID id;
+    private Long version;
     private String name;
     private AccountType type;
 }

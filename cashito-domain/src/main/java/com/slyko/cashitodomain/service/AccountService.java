@@ -18,16 +18,23 @@ public class AccountService implements AccountManagementPort {
 
     @Override
     public Flux<Account> getAccounts() {
-        return accountsSecondaryPort.findAllAccounts();
+        return accountsSecondaryPort.getAll();
     }
 
     @Override
-    public Mono<Account> getAccount(UUID id) {
-        return null;
+    public Mono<Account> getAccountById(UUID id, Long version, boolean loadRelations) {
+        return accountsSecondaryPort.getById(id, version, loadRelations);
     }
 
     @Override
     public Mono<Account> createAccount(Account account) {
         return accountsSecondaryPort.createAccount(account);
     }
+
+    @Override
+    public Mono<Void> deleteAccountById(UUID id, Long version) {
+        return accountsSecondaryPort.deleteAccountById(id, version);
+    }
+
+
 }
