@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public abstract interface AccountsSecondaryPort {
 
-    Flux<Account> findAllAccounts();
-    Mono<Account> findAccountById(UUID productId);
+    Flux<Account> getAll();
+    Mono<Account> getById(UUID productId, Long version, boolean loadRelations);
     Mono<Account> createAccount(Account account);
+    Mono<Void> deleteAccountById(UUID id, Long version);
 }

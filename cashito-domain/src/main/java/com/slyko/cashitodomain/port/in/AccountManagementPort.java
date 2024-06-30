@@ -9,6 +9,7 @@ import java.util.UUID;
 public abstract interface AccountManagementPort {
 
     Flux<Account> getAccounts();
-    Mono<Account> getAccount(UUID id);
+    Mono<Account> getAccountById(UUID id, Long version, boolean loadRelations);
     Mono<Account> createAccount(Account account);
+    Mono<Void> deleteAccountById(UUID id, Long version);
 }
