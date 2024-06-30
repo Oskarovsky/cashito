@@ -52,6 +52,11 @@ public class DealService implements DealManagementPort {
     }
 
     @Override
+    public Mono<Void> deleteDeal(UUID dealId, Long version) {
+        return dealsSecondaryPort.delete(dealId, version);
+    }
+
+    @Override
     public Mono<BigDecimal> getDealCost(UUID id) {
         return dealsSecondaryPort.getDealCost(id);
     }

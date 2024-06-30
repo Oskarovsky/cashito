@@ -13,6 +13,7 @@ public abstract interface DealsSecondaryPort {
     Flux<Deal> findAll();
     Mono<Deal> create(Deal deal);
     Mono<Deal> update(UUID id, Long version, Deal deal);
+    Mono<Void> delete(UUID id, Long version);
     Mono<Deal> updateDealProducts(UUID id, Long version, Deal deal);
     Mono<BigDecimal> getDealCost(UUID id);
 }

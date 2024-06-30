@@ -14,9 +14,3 @@ Content-Type: application/json
   "name" : "slyko",
   "type": "BUSINESS"
 }
-
-// 2e5c4471-b748-47b9-97af-501314993e18
-
-
-### DELETE remove account by id
-DELETE http://localhost:8080
