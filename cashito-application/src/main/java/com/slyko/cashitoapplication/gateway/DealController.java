@@ -7,6 +7,8 @@ import com.slyko.cashitodomain.port.in.DealManagementPort;
 import com.slyko.cashitodomain.model.Deal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.noContent;
 
 @RestController
 @RequestMapping(value = "/deal")
@@ -48,6 +51,16 @@ public class DealController {
             @RequestBody final DealRequest request
     ) {
         return dealManagementPort.updateDeal(id, version, request.toDomainUpdate());
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Mono<ResponseEntity<Void>> deleteDeal(
+            @PathVariable UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version) {
+        return dealManagementPort
+                .deleteDeal(id, version)
+                .then(Mono.fromCallable(() -> noContent().build()));
     }
 
     @PatchMapping(value = "/{id}/status")

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -117,6 +118,15 @@ public class DealDbAdapter implements DealsSecondaryPort {
 
 
 
+    }
+
+    @Override
+    @Transactional
+    public Mono<Void> delete(UUID id, Long version) {
+        return findById(id, version, false)
+                .zipWith(productReactiveRepository.deleteAllByDealId(id))
+                .map(Tuple2::getT1)
+                .flatMap(t -> dealReactiveRepository.delete(DealMapper.toDb(t)));
     }
 
     @Override

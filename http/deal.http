@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "name": "Initial deal",
-  "accountId": "2e5c4471-b748-47b9-97af-501314993e18",
+  "accountId": "de6edf1c-7cde-42c2-98bb-79cd7f7d3032",
   "products": [
     {
       "name": "Towar Pierwszy",
@@ -38,6 +38,7 @@ If-Match: 1
   "products": []
 }
 
+
 ### PATCH change status of deal
 PATCH http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/status
 Content-Type: application/json
@@ -48,6 +49,12 @@ If-Match: 3
   "version": 1,
   "status": "NEW"
 }
+
+
+### DELETE deal by id with all products
+DELETE http://localhost:8080/deal/b5ef0110-f407-4088-b206-a569e008458d
+If-Match: 0
+
 
 ### POST add new products to deal
 POST http://localhost:8080/deal/ef267e0b-e0d9-46f3-ab84-049cdb55667d/relationships/products

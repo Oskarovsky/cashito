@@ -11,4 +11,5 @@ public abstract interface ProductsSecondaryPort {
     Flux<Product> findAllProducts();
     Mono<Product> findProductById(UUID productId);
     Mono<Product> createProduct(Product product);
+    Mono<Void> deleteProduct(UUID productId);
 }

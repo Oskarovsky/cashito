@@ -14,10 +14,10 @@ Content-Type: application/json
   "name": "Product Example Update",
   "productType": "BUSINESS",
   "cost": 32.39,
-  "dealId": "23c36975-6c30-40de-ad36-d35ea362cf46"
+  "dealId": "b7e12255-dc83-42b4-a6c2-09d1bf721445"
 }
 
 // 23c36975-6c30-40de-ad36-d35ea362cf46
 
 ### DELETE remove product by id
-DELETE http://localhost:8080
+DELETE http://localhost:8080/product/c5d10ad8-7b4b-401f-aa03-88295bd0b816

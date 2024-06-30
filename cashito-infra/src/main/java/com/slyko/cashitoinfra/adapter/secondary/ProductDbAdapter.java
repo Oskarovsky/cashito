@@ -37,4 +37,10 @@ public class ProductDbAdapter implements ProductsSecondaryPort {
                 .save(ProductMapper.toDb(product))
                 .map(ProductMapper::toApi);
     }
+
+    @Override
+    public Mono<Void> deleteProduct(UUID productId) {
+        return productReactiveRepository
+                .deleteById(productId);
+    }
 }
