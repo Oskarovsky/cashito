@@ -26,7 +26,7 @@ public class AccountController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Flux<Account> getAccounts() {
-        return accountManagementPort.getAccounts();
+        return accountManagementPort.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
@@ -34,13 +34,13 @@ public class AccountController {
             @PathVariable(value = "id") UUID id,
             @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
     ) {
-        return accountManagementPort.getAccountById(id, null, loadRelations);
+        return accountManagementPort.getById(id, null, loadRelations);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Account> createAccount(@RequestBody AccountRequest request) {
-        return accountManagementPort.createAccount(request.toDomain());
+        return accountManagementPort.create(request.toDomain());
     }
 
     @DeleteMapping("/{id}")
@@ -49,7 +49,7 @@ public class AccountController {
             @PathVariable UUID id,
             @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version) {
         return accountManagementPort
-                .deleteAccountById(id, version)
+                .deleteById(id, version)
                 .then(Mono.fromCallable(() -> noContent().build()));
     }
 }
