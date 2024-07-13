@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataR2dbcTest
 @ExtendWith(SpringExtension.class)
-public class AccountReactiveRepositoryTest {
+class AccountReactiveRepositoryTest {
 
     @Autowired
     AccountReactiveRepository accountReactiveRepository;
@@ -31,8 +31,8 @@ public class AccountReactiveRepositoryTest {
 
     @Test
     @DisplayName("Test create one business Account in database")
-    public void shouldSaveOneAccountInDatabase(){
-        AccountEntity account = new AccountEntity(null, "First Account", AccountType.BUSINESS);
+    void shouldSaveOneAccountInDatabase(){
+        AccountEntity account = new AccountEntity(null, 1L, "First Account", AccountType.BUSINESS);
         Mono<AccountEntity> accountEntityFlux = accountReactiveRepository.save(account);
         StepVerifier
                 .create(accountEntityFlux)
@@ -42,10 +42,10 @@ public class AccountReactiveRepositoryTest {
 
     @Test
     @DisplayName("Test create one public Account in database with specific name and type")
-    public void shouldSaveAccountInDatabase(){
+    void shouldSaveAccountInDatabase(){
         // GIVEN
         var accountName = "Second Account";
-        AccountEntity account = new AccountEntity(null, accountName, AccountType.PUBLIC);
+        AccountEntity account = new AccountEntity(null, 1L, accountName, AccountType.PUBLIC);
 
         // WHEN
         Publisher<AccountEntity> setup = accountReactiveRepository.save(account);
