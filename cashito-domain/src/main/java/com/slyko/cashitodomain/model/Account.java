@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Account {
+public non-sealed class Account extends BaseApi {
     private UUID id;
     private Long version;
     private String name;

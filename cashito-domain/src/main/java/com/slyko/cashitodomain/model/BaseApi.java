@@ -1,4 +1,4 @@
 package com.slyko.cashitodomain.model;
 
-public abstract class BaseApi {
+public abstract sealed class BaseApi permits Account, Deal {
 }

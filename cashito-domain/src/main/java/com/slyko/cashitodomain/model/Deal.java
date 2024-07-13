@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class Deal {
+public non-sealed class Deal extends BaseApi {
 
     private UUID id;
     private Long version;

@@ -47,15 +47,14 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
     }
 
     @Override
-    public Mono<Account> createAccount(Account account) {
+    public Mono<Account> create(Account account) {
         return accountReactiveRepository
                 .save(AccountMapper.toDb(account))
                 .map(AccountMapper::toApi);
     }
 
     @Override
-    public Mono<Void> deleteAccountById(UUID id, Long version) {
+    public Mono<Void> deleteById(UUID uuid, Long version) {
         // TODO add function for removing account id and all object which has relation to account
-        return null;
-    }
+        return null;    }
 }
