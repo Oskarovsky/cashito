@@ -25,7 +25,7 @@ public class PaymentDbAdapter implements PaymentsSecondaryPort {
     }
 
     @Override
-    public Mono<Payment> findById(UUID id) {
+    public Mono<Payment> findById(UUID id, Long version, boolean loadRelations) {
         return paymentReactiveRepository
                 .findById(id)
                 .map(PaymentMapper::toApi);
@@ -39,9 +39,19 @@ public class PaymentDbAdapter implements PaymentsSecondaryPort {
     }
 
     @Override
-    public Mono<Payment> createPayment(Payment payment) {
+    public Mono<Payment> create(Payment payment) {
         return paymentReactiveRepository
                 .save(PaymentMapper.toDb(payment))
                 .map(PaymentMapper::toApi);
+    }
+
+    @Override
+    public Mono<Payment> update(UUID uuid, Long version, Payment payment) {
+        return null;
+    }
+
+    @Override
+    public Mono<Void> deleteById(UUID uuid, Long version) {
+        return null;
     }
 }
