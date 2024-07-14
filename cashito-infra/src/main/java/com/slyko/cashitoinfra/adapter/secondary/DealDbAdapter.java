@@ -2,8 +2,8 @@ package com.slyko.cashitoinfra.adapter.secondary;
 
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
-import com.slyko.cashitodomain.port.out.DealsSecondaryPort;
 import com.slyko.cashitodomain.model.Deal;
+import com.slyko.cashitodomain.port.out.DealsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.secondary.entity.ProductEntity;
 import com.slyko.cashitoinfra.adapter.secondary.mapper.DealMapper;
 import com.slyko.cashitoinfra.adapter.secondary.mapper.ProductMapper;
@@ -122,7 +122,7 @@ public class DealDbAdapter implements DealsSecondaryPort {
 
     @Override
     @Transactional
-    public Mono<Void> delete(UUID id, Long version) {
+    public Mono<Void> deleteById(UUID id, Long version) {
         return findById(id, version, false)
                 .zipWith(productReactiveRepository.deleteAllByDealId(id))
                 .map(Tuple2::getT1)
