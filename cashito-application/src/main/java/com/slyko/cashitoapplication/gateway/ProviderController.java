@@ -21,20 +21,20 @@ public class ProviderController {
 
     @GetMapping
     public ResponseEntity<Flux<Provider>> getProducts() {
-        Flux<Provider> productFlux = providerManagementPort.getProviders();
+        Flux<Provider> productFlux = providerManagementPort.getAll();
         return new ResponseEntity<>(productFlux, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Mono<Provider>> getProduct(@PathVariable(value = "id") UUID id) {
-        Mono<Provider> productMono = providerManagementPort.getProvider(id);
+        Mono<Provider> productMono = providerManagementPort.getById(id, null, false);
         return new ResponseEntity<>(productMono, HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Mono<Provider>> createProduct(@RequestBody ProviderRequest request) {
-        Mono<Provider> product = providerManagementPort.createProvider(request.toDomain());
+        Mono<Provider> product = providerManagementPort.create(request.toDomain());
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
