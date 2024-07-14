@@ -28,7 +28,7 @@ public class DealController {
 
     @GetMapping
     public Flux<Deal> getDeals() {
-        return dealManagementPort.getDeals();
+        return dealManagementPort.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
@@ -36,12 +36,12 @@ public class DealController {
             @PathVariable(value = "id") UUID id,
             @RequestParam(value = "relations", defaultValue = "false") boolean loadRelations
     ) {
-        return dealManagementPort.getDealById(id, null, loadRelations);
+        return dealManagementPort.getById(id, null, loadRelations);
     }
 
     @PostMapping
     public Mono<Deal> createDeal(@RequestBody DealRequest request) {
-        return dealManagementPort.createDeal(request.toDomainCreate());
+        return dealManagementPort.create(request.toDomainCreate());
     }
 
     @PutMapping(value = "/{id}")
@@ -50,7 +50,7 @@ public class DealController {
             @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
             @RequestBody final DealRequest request
     ) {
-        return dealManagementPort.updateDeal(id, version, request.toDomainUpdate());
+        return dealManagementPort.update(id, version, request.toDomainUpdate());
     }
 
     @DeleteMapping("/{id}")
@@ -59,7 +59,7 @@ public class DealController {
             @PathVariable UUID id,
             @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version) {
         return dealManagementPort
-                .deleteDeal(id, version)
+                .deleteById(id, version)
                 .then(Mono.fromCallable(() -> noContent().build()));
     }
 
@@ -69,7 +69,7 @@ public class DealController {
             @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
             @RequestBody final DealStatusRequest request
     ) {
-        return dealManagementPort.updateDeal(id, version, request.toDomain());
+        return dealManagementPort.update(id, version, request.toDomain());
     }
 
     @PostMapping(value = "/{id}/relationships/products")

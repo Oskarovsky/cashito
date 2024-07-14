@@ -20,14 +20,14 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
     private final AccountReactiveRepository accountReactiveRepository;
 
     @Override
-    public Flux<Account> getAll() {
+    public Flux<Account> findAll() {
         return accountReactiveRepository
                 .findAll()
                 .map(AccountMapper::toApi);
     }
 
     @Override
-    public Mono<Account> getById(UUID accountId, Long version, boolean loadRelations) {
+    public Mono<Account> findById(UUID accountId, Long version, boolean loadRelations) {
         final Mono<Account> dealMono = accountReactiveRepository.findById(accountId)
                 .switchIfEmpty(Mono.error(new DealNotFoundException(accountId)))
                 .handle((account, sink) -> {
@@ -51,6 +51,11 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
         return accountReactiveRepository
                 .save(AccountMapper.toDb(account))
                 .map(AccountMapper::toApi);
+    }
+
+    @Override
+    public Mono<Account> update(UUID uuid, Long version, Account account) {
+        return null;
     }
 
     @Override

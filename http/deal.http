@@ -4,7 +4,7 @@ GET http://localhost:8080/deal
 
 
 ### GET deal by id
-GET http://localhost:8080/deal/ef267e0b-e0d9-46f3-ab84-049cdb55667d
+GET http://localhost:8080/deal/d0e214c3-29cc-46c9-9d0c-9973c532abd1
     ?relations=true
 
 
@@ -25,12 +25,12 @@ Content-Type: application/json
 }
 
 ### PUT update deal
-PUT http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f
+PUT http://localhost:8080/deal/b7e12255-dc83-42b4-a6c2-09d1bf721445
 Content-Type: application/json
 If-Match: 1
 
 {
-  "id": "0b4abd0b-8a33-48c4-bae3-2b568c63234f",
+  "id": "b7e12255-dc83-42b4-a6c2-09d1bf721445",
   "version": 0,
   "name": "Support deal 3",
   "status": "READY",
@@ -52,17 +52,17 @@ If-Match: 3
 
 
 ### DELETE deal by id with all products
-DELETE http://localhost:8080/deal/b5ef0110-f407-4088-b206-a569e008458d
+DELETE http://localhost:8080/deal/b7e12255-dc83-42b4-a6c2-09d1bf721445
 If-Match: 0
 
 
 ### POST add new products to deal
-POST http://localhost:8080/deal/ef267e0b-e0d9-46f3-ab84-049cdb55667d/relationships/products
+POST http://localhost:8080/deal/d0e214c3-29cc-46c9-9d0c-9973c532abd1/relationships/products
 Content-Type: application/json
 If-Match: 0
 
 {
-  "id": "ef267e0b-e0d9-46f3-ab84-049cdb55667d",
+  "id": "d0e214c3-29cc-46c9-9d0c-9973c532abd1",
   "version": 0,
   "products": [
     {
@@ -80,4 +80,4 @@ If-Match: 0
 
 
 ### POST calculate cost of all products related to Deal
-GET http://localhost:8080/deal/ef267e0b-e0d9-46f3-ab84-049cdb55667d/cost
+GET http://localhost:8080/deal/d0e214c3-29cc-46c9-9d0c-9973c532abd1/cost

@@ -2,12 +2,10 @@ package com.slyko.cashitodomain.service;
 
 import com.slyko.cashitodomain.port.in.BaseManagementPort;
 import com.slyko.cashitodomain.port.out.BaseSecondaryPort;
-import com.slyko.cashitodomain.util.UseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@UseCase
 @RequiredArgsConstructor
 public class BaseService<T, ID> implements BaseManagementPort<T, ID> {
 
@@ -15,12 +13,12 @@ public class BaseService<T, ID> implements BaseManagementPort<T, ID> {
 
     @Override
     public Flux<T> getAll() {
-        return baseSecondaryPort.getAll();
+        return baseSecondaryPort.findAll();
     }
 
     @Override
     public Mono<T> getById(ID id, Long version, boolean loadRelations) {
-        return baseSecondaryPort.getById(id, version, loadRelations);
+        return baseSecondaryPort.findById(id, version, loadRelations);
     }
 
     @Override
