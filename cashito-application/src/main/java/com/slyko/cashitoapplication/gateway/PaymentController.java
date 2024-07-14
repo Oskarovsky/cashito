@@ -21,18 +21,18 @@ public class PaymentController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Flux<Payment> getPayments() {
-        return paymentManagementPort.getPayments();
+        return paymentManagementPort.getAll();
     }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Mono<Payment> getPayments(@PathVariable UUID id) {
-        return paymentManagementPort.getPayment(id);
+        return paymentManagementPort.getById(id, null, false);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Payment> createPayment(@RequestBody PaymentRequest request) {
-        return paymentManagementPort.createPayment(request.toDomain());
+        return paymentManagementPort.create(request.toDomain());
     }
 }

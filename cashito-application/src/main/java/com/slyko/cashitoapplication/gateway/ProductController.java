@@ -24,20 +24,20 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Flux<Product>> getProducts() {
-        Flux<Product> productFlux = productManagementPort.getProducts();
+        Flux<Product> productFlux = productManagementPort.getAll();
         return new ResponseEntity<>(productFlux, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Mono<Product>> getProduct(@PathVariable(value = "id") UUID id) {
-        Mono<Product> productMono = productManagementPort.getProduct(id);
+        Mono<Product> productMono = productManagementPort.getById(id, null, false);
         return new ResponseEntity<>(productMono, HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Mono<Product>> createProduct(@RequestBody ProductRequest request) {
-        Mono<Product> product = productManagementPort.createProduct(request.toDomain());
+        Mono<Product> product = productManagementPort.create(request.toDomain());
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public Mono<ResponseEntity<Void>> deleteProduct(@PathVariable UUID id) {
         return productManagementPort
-                .deleteProduct(id)
+                .deleteById(id, null)
                 .then(Mono.fromCallable(() -> noContent().build()));
     }
 

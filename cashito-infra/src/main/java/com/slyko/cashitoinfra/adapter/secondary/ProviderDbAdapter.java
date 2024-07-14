@@ -18,23 +18,33 @@ public class ProviderDbAdapter implements ProviderSecondaryPort {
     private final ProviderReactiveRepository providerReactiveRepository;
 
     @Override
-    public Flux<Provider> findAllProviders() {
+    public Flux<Provider> findAll() {
         return providerReactiveRepository
                 .findAll()
                 .map(ProviderMapper::toApi);
     }
 
     @Override
-    public Mono<Provider> findProviderById(UUID id) {
+    public Mono<Provider> findById(UUID id, Long version, boolean loadRelations) {
         return providerReactiveRepository
                 .findById(id)
                 .map(ProviderMapper::toApi);
     }
 
     @Override
-    public Mono<Provider> createProvider(Provider provider) {
+    public Mono<Provider> create(Provider provider) {
         return providerReactiveRepository
                 .save(ProviderMapper.toDb(provider))
                 .map(ProviderMapper::toApi);
+    }
+
+    @Override
+    public Mono<Provider> update(UUID uuid, Long version, Provider provider) {
+        return null;
+    }
+
+    @Override
+    public Mono<Void> deleteById(UUID uuid, Long version) {
+        return null;
     }
 }

@@ -18,29 +18,34 @@ public class ProductDbAdapter implements ProductsSecondaryPort {
     private final ProductReactiveRepository productReactiveRepository;
 
     @Override
-    public Flux<Product> findAllProducts() {
+    public Flux<Product> findAll() {
         return productReactiveRepository
                 .findAll()
                 .map(ProductMapper::toApi);
     }
 
     @Override
-    public Mono<Product> findProductById(UUID id) {
+    public Mono<Product> findById(UUID id, Long version, boolean loadRelations) {
         return productReactiveRepository
                 .findById(id)
                 .map(ProductMapper::toApi);
     }
 
     @Override
-    public Mono<Product> createProduct(Product product) {
+    public Mono<Product> create(Product product) {
         return productReactiveRepository
                 .save(ProductMapper.toDb(product))
                 .map(ProductMapper::toApi);
     }
 
     @Override
-    public Mono<Void> deleteProduct(UUID productId) {
+    public Mono<Product> update(UUID uuid, Long version, Product product) {
+        return null;
+    }
+
+    @Override
+    public Mono<Void> deleteById(UUID uuid, Long version) {
         return productReactiveRepository
-                .deleteById(productId);
+                .deleteById(uuid);
     }
 }
