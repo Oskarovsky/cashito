@@ -4,6 +4,9 @@ package com.slyko.cashitoinfra.repository;
 import com.slyko.cashitodomain.model.AccountType;
 import com.slyko.cashitoinfra.adapter.secondary.entity.AccountEntity;
 import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.repository.DealReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.repository.ProductReactiveRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +14,7 @@ import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -19,10 +23,30 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataR2dbcTest
 @ExtendWith(SpringExtension.class)
+@Testcontainers
 class AccountReactiveRepositoryTest {
 
     @Autowired
     AccountReactiveRepository accountReactiveRepository;
+
+    @Autowired
+    DealReactiveRepository dealReactiveRepository;
+
+    @Autowired
+    ProductReactiveRepository productReactiveRepository;
+
+    @BeforeEach
+    public void setup() {
+        productReactiveRepository.deleteAll()
+                .as(StepVerifier::create)
+                .verifyComplete();
+        dealReactiveRepository.deleteAll()
+                .as(StepVerifier::create)
+                .verifyComplete();
+        accountReactiveRepository.deleteAll()
+                .as(StepVerifier::create)
+                .verifyComplete();
+    }
 
     @Test
     @DisplayName("Test create one business Account in database")
@@ -37,16 +61,11 @@ class AccountReactiveRepositoryTest {
 
     @Test
     @DisplayName("Get all accounts from database")
-    void shouldGetAllAccountsFromDatabase() {
-        // GIVEN
-
-        // WHEN
+    void shouldGetReturnEmptyListOfAccountsFromDatabase() {
         accountReactiveRepository.findAll()
                 .as(StepVerifier::create)
-                .expectNextCount(2)
+                .expectNextCount(0)
                 .verifyComplete();
-
-        // THEN
     }
 
     @Test
@@ -76,6 +95,7 @@ class AccountReactiveRepositoryTest {
         Mono<AccountEntity> result = accountReactiveRepository.findByName(accountName);
         Publisher<AccountEntity> composite = Mono
                 .from(setup)
+                .thenMany(accountReactiveRepository.findAll())
                 .then(result);
 
         // THEN
