@@ -25,6 +25,7 @@ public class AccountEntity extends BaseEntity {
 
     public AccountEntity(UUID id, Long version, String name, AccountType type) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
+        this.version = version;
         this.name = name;
         this.type = type;
     }

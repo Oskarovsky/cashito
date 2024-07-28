@@ -43,26 +43,22 @@ class AccountReactiveRepositoryTest {
 
     @BeforeEach
     public void setup() {
-        testData.prepareDatabase();
+        testData.clearDatabase();
     }
 
     @Test
     @DisplayName("Test create one business Account in database")
     void shouldSaveOneAccountInDatabase() {
-        AccountEntity account = new AccountEntity(null, 1L, "First Account", AccountType.BUSINESS);
+        // GIVEN
+        AccountEntity account = new AccountEntity(null, 1L, "Init Account", AccountType.BUSINESS);
+
+        // WHEN
         Mono<AccountEntity> accountEntityFlux = accountReactiveRepository.save(account);
+
+        // THEN
         StepVerifier
                 .create(accountEntityFlux)
                 .expectNextCount(1)
-                .verifyComplete();
-    }
-
-    @Test
-    @DisplayName("Get empty list of accounts from database")
-    void shouldGetReturnEmptyListOfAccountsFromDatabase() {
-        accountReactiveRepository.findAll()
-                .as(StepVerifier::create)
-                .expectNextCount(0)
                 .verifyComplete();
     }
 
@@ -77,7 +73,60 @@ class AccountReactiveRepositoryTest {
         StepVerifier.create(accountReactiveRepository.save(account))
                 .expectNextMatches(acc -> acc.getId() != null)
                 .verifyComplete();
+    }
 
+    @Test
+    @DisplayName("Get empty list of accounts from database")
+    void shouldGetEmptyListOfAccountsFromDatabase() {
+        // WHEN
+        accountReactiveRepository.findAll()
+                .as(StepVerifier::create)
+                .expectNextCount(0)
+                .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("Get list of accounts from database")
+    void shouldGetListOfAccountsFromDatabase() {
+        // WHEN
+        testData.addAccountsToDatabase();
+
+        // THEN
+        accountReactiveRepository.findAll()
+                .as(StepVerifier::create)
+                .expectNextCount(4)
+                .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("Delete one Account by name from database")
+    void shouldRemoveOneAccountFromByNameDatabase() {
+        // GIVEN
+        testData.addAccountsToDatabase();
+
+        // WHEN
+        Mono<Long> initialCount = accountReactiveRepository.count();
+        Mono<long[]> finalCount = initialCount.flatMap(countBefore ->
+                accountReactiveRepository
+                        .findByName("First Account")
+                        .flatMap(accountEntity ->
+                                accountReactiveRepository.deleteById(accountEntity.getId())
+                        )
+                        .then(accountReactiveRepository.count())
+                        .map(countAfter -> new long[]{countBefore, countAfter})
+        );
+
+        // THEN
+        StepVerifier
+                .create(initialCount)
+                .expectNextMatches(count -> count > 0)
+                .verifyComplete();
+
+        // THEN
+        StepVerifier
+                .create(finalCount)
+                .expectNextMatches(counts -> counts[1] == counts[0] - 1) // Ensure count is decreased by one
+                .verifyComplete();
     }
 
 
