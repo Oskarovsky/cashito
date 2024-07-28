@@ -1,9 +1,9 @@
 package com.slyko.cashitoinfra.service;
 
+import com.slyko.cashitoapplication.exception.AccountNotFoundException;
 import com.slyko.cashitodomain.model.Account;
 import com.slyko.cashitodomain.model.AccountType;
 import com.slyko.cashitodomain.port.out.AccountsSecondaryPort;
-import com.slyko.cashitodomain.port.out.BaseSecondaryPort;
 import com.slyko.cashitodomain.service.AccountService;
 import com.slyko.cashitoinfra.adapter.secondary.AccountDbAdapter;
 import com.slyko.cashitoinfra.adapter.secondary.entity.AccountEntity;
@@ -11,8 +11,6 @@ import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveReposi
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,26 +42,39 @@ class AccountServiceTest {
     }
 
     @Test
-    void shouldGetAccount() {
-        MockitoAnnotations.openMocks(this);
-
+    void shouldGetAccountById() {
         // GIVEN
         var accountUuid = UUID.fromString("b7e12255-dc83-42b4-a6c2-09d1bf721445");
         AccountEntity account = new AccountEntity(accountUuid, 1L, "Init Account", AccountType.BUSINESS);
         when(accountReactiveRepository.findById(accountUuid)).thenReturn(Mono.just(account));
 
         // WHEN
-        Mono<Account> accountEntity = accountService.getById(accountUuid, 1L, false);
+        Mono<Account> accountMono = accountService.getById(accountUuid, 1L, false);
 
         // THEN
         StepVerifier
-                .create(accountEntity)
+                .create(accountMono)
                 .consumeNextWith(acc -> {
                     assertEquals(accountUuid, acc.getId());
                     assertEquals(1L, acc.getVersion());
                     assertEquals("Init Account", acc.getName());
                 })
                 .verifyComplete();
+    }
+
+    @Test
+    void shouldGetExceptionWhenAccountNotFound() {
+        // GIVEN
+        var accountUuid = UUID.fromString("b7e12255-dc83-42b4-a6c2-09d1bf721445");
+        when(accountReactiveRepository.findById(accountUuid)).thenReturn(Mono.empty());
+
+        // WHEN
+        Mono<Account> accountMono = accountService.getById(accountUuid, 1L, false);
+
+        StepVerifier
+                .create(accountMono)
+                .expectErrorMatches(throwable -> throwable instanceof AccountNotFoundException)
+                .verify();
     }
 
 }

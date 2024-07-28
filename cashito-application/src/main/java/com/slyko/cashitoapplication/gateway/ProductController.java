@@ -1,10 +1,9 @@
 package com.slyko.cashitoapplication.gateway;
 
 import com.slyko.cashitoapplication.request.ProductRequest;
-import com.slyko.cashitodomain.port.in.ProductManagementPort;
 import com.slyko.cashitodomain.model.Product;
+import com.slyko.cashitodomain.port.in.ProductManagementPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
