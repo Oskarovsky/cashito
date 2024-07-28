@@ -2,6 +2,7 @@ package com.slyko.cashitoinfra.repository;
 
 
 import com.slyko.cashitodomain.model.AccountType;
+import com.slyko.cashitoinfra.TestData;
 import com.slyko.cashitoinfra.adapter.secondary.entity.AccountEntity;
 import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveRepository;
 import com.slyko.cashitoinfra.adapter.secondary.repository.DealReactiveRepository;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import reactor.core.publisher.Mono;
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataR2dbcTest
 @ExtendWith(SpringExtension.class)
 @Testcontainers
+@Import(TestData.class)
 class AccountReactiveRepositoryTest {
 
     @Autowired
@@ -35,17 +38,12 @@ class AccountReactiveRepositoryTest {
     @Autowired
     ProductReactiveRepository productReactiveRepository;
 
+    @Autowired
+    private TestData testData;
+
     @BeforeEach
     public void setup() {
-        productReactiveRepository.deleteAll()
-                .as(StepVerifier::create)
-                .verifyComplete();
-        dealReactiveRepository.deleteAll()
-                .as(StepVerifier::create)
-                .verifyComplete();
-        accountReactiveRepository.deleteAll()
-                .as(StepVerifier::create)
-                .verifyComplete();
+        testData.prepareDatabase();
     }
 
     @Test
@@ -60,7 +58,7 @@ class AccountReactiveRepositoryTest {
     }
 
     @Test
-    @DisplayName("Get all accounts from database")
+    @DisplayName("Get empty list of accounts from database")
     void shouldGetReturnEmptyListOfAccountsFromDatabase() {
         accountReactiveRepository.findAll()
                 .as(StepVerifier::create)
