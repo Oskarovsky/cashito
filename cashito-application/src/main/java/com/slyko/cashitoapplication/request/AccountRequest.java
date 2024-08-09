@@ -20,4 +20,13 @@ public record AccountRequest(
             type
         );
     }
+
+    public Account toDomainUpdate() {
+        return new Account(
+            id,
+            version,
+            name,
+            type
+        );
+    }
 }

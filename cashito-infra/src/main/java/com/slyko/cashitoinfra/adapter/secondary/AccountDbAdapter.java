@@ -6,12 +6,14 @@ import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitodomain.model.Account;
 import com.slyko.cashitodomain.port.out.AccountsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.secondary.mapper.AccountMapper;
+import com.slyko.cashitoinfra.adapter.secondary.mapper.DealMapper;
 import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -55,8 +57,19 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
     }
 
     @Override
-    public Mono<Account> update(UUID uuid, Long version, Account account) {
-        return null;
+    public Mono<Account> update(UUID id, Long version, Account accountApi) {
+        if (accountApi.getId() == null || accountApi.getVersion() == null) {
+            return Mono.error(new IllegalArgumentException("When updating an account, the id and the version must be provided"));
+        }
+        return findById(id, version, false)
+                .switchIfEmpty(Mono.error(new DealNotFoundException(accountApi.getId())))
+                .map(AccountMapper::toDb)
+                .flatMap(db -> {
+                    Optional.ofNullable(accountApi.getName()).ifPresent(db::setName);
+                    Optional.ofNullable(accountApi.getType()).ifPresent(db::setType);
+                    return accountReactiveRepository.save(db);
+                })
+                .map(AccountMapper::toApi);
     }
 
     @Override

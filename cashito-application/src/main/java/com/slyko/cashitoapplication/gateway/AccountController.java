@@ -1,6 +1,8 @@
 package com.slyko.cashitoapplication.gateway;
 
 import com.slyko.cashitoapplication.request.AccountRequest;
+import com.slyko.cashitoapplication.request.DealRequest;
+import com.slyko.cashitodomain.model.Deal;
 import com.slyko.cashitodomain.port.in.AccountManagementPort;
 import com.slyko.cashitodomain.model.Account;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +43,15 @@ public class AccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Account> createAccount(@RequestBody AccountRequest request) {
         return accountManagementPort.create(request.toDomain());
+    }
+
+    @PutMapping(value = "/{id}")
+    public Mono<Account> update(
+            @PathVariable final UUID id,
+            @RequestHeader(value = HttpHeaders.IF_MATCH) final Long version,
+            @RequestBody final AccountRequest request
+    ) {
+        return accountManagementPort.update(id, version, request.toDomainUpdate());
     }
 
     @DeleteMapping("/{id}")
