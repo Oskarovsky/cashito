@@ -27,8 +27,8 @@ public class BaseService<T, ID> implements BaseManagementPort<T, ID> {
     }
 
     @Override
-    public Mono<T> update(ID id, Long version, T deal) {
-        return null;
+    public Mono<T> update(ID id, Long version, T api) {
+        return baseSecondaryPort.update(id, version, api);
     }
 
     @Override

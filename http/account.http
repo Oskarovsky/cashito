@@ -3,7 +3,7 @@ GET http://localhost:8080/account
 
 
 ### GET account by id
-GET http://localhost:8080/account/0bb3b04f-3c7c-4872-a69a-8918775b7233
+GET http://localhost:8080/account/a939d9be-6804-4cca-b7a4-477d15d50a40
 
 
 ### POST create account
@@ -13,4 +13,15 @@ Content-Type: application/json
 {
   "name" : "slyko",
   "type": "BUSINESS"
+}
+
+### PUT update account
+PUT http://localhost:8080/account/a939d9be-6804-4cca-b7a4-477d15d50a40
+Content-Type: application/json
+If-Match: 1
+
+{
+  "id": "a939d9be-6804-4cca-b7a4-477d15d50a40",
+  "name": "Updated Account",
+  "type": "PRIVATE"
 }
