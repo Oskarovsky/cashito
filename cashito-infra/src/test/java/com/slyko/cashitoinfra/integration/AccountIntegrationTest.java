@@ -60,6 +60,7 @@ class AccountIntegrationTest {
                 .expectStatus()
                 .isNotFound()
                 .expectBody()
-                .jsonPath("status").isEqualTo(404);
+                .jsonPath("status")
+                .isEqualTo(404);
     }
 }

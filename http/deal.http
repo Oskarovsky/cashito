@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "name": "Initial deal",
-  "accountId": "de6edf1c-7cde-42c2-98bb-79cd7f7d3032",
+  "accountId": "0f0a4beb-4632-4fb5-90cc-47e67a5d3928",
   "products": [
     {
       "name": "Towar Pierwszy",
