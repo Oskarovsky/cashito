@@ -50,7 +50,7 @@ class AccountReactiveRepositoryTest {
     @DisplayName("Test create one business Account in database")
     void shouldSaveOneAccountInDatabase() {
         // GIVEN
-        AccountEntity account = new AccountEntity(null, 1L, "Init Account", AccountType.BUSINESS);
+        AccountEntity account = new AccountEntity(null, null, "Init Account", AccountType.BUSINESS);
 
         // WHEN
         Mono<AccountEntity> accountEntityFlux = accountReactiveRepository.save(account);
@@ -67,7 +67,7 @@ class AccountReactiveRepositoryTest {
     void shouldSavePrivateAccountInDatabase() {
         // GIVEN
         var accountName = "Priv Account";
-        AccountEntity account = new AccountEntity(null, 1L, accountName, AccountType.PRIVATE);
+        AccountEntity account = new AccountEntity(null, null, accountName, AccountType.PRIVATE);
 
         // WHEN
         StepVerifier.create(accountReactiveRepository.save(account))
@@ -135,7 +135,7 @@ class AccountReactiveRepositoryTest {
     void shouldSaveAccountInDatabase() {
         // GIVEN
         var accountName = "Public Account";
-        AccountEntity account = new AccountEntity(null, 1L, accountName, AccountType.PUBLIC);
+        AccountEntity account = new AccountEntity(null, null, accountName, AccountType.PUBLIC);
 
         // WHEN
         Mono<AccountEntity> setup = accountReactiveRepository.save(account);

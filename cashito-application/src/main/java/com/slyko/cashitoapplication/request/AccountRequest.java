@@ -15,7 +15,7 @@ public record AccountRequest(
     public Account toDomain() {
         return new Account(
             null,
-            null,
+            version,
             name,
             type
         );

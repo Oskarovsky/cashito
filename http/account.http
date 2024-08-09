@@ -3,7 +3,7 @@ GET http://localhost:8080/account
 
 
 ### GET account by id
-GET http://localhost:8080/account/cd05f64c-2c39-49fe-ab33-b83613aeef2e
+GET http://localhost:8080/account/0bb3b04f-3c7c-4872-a69a-8918775b7233
 
 
 ### POST create account

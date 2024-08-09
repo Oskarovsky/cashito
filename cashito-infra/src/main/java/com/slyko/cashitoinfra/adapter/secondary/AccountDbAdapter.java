@@ -1,5 +1,6 @@
 package com.slyko.cashitoinfra.adapter.secondary;
 
+import com.slyko.cashitoapplication.exception.AccountNotFoundException;
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitodomain.model.Account;
@@ -28,8 +29,8 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
 
     @Override
     public Mono<Account> findById(UUID accountId, Long version, boolean loadRelations) {
-        final Mono<Account> dealMono = accountReactiveRepository.findById(accountId)
-                .switchIfEmpty(Mono.error(new DealNotFoundException(accountId)))
+        final Mono<Account> accountMono = accountReactiveRepository.findById(accountId)
+                .switchIfEmpty(Mono.error(new AccountNotFoundException(accountId)))
                 .handle((account, sink) -> {
                     // Optimistic locking: pre-check
                     if (version != null && !version.equals(account.getVersion())) {
@@ -42,8 +43,8 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
                 });
         // Load the related objects, if requested
         return loadRelations
-                ? dealMono // TODO add loadRelations
-                : dealMono;
+                ? accountMono // TODO add loadRelations
+                : accountMono;
     }
 
     @Override
