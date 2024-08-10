@@ -13,10 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @DataR2dbcTest
 @ExtendWith(SpringExtension.class)
@@ -48,17 +54,28 @@ public class TestData {
     }
 
     public void addAccountsToDatabase() {
-        Flux<AccountEntity> accountEntityFlux = accountReactiveRepository.saveAll(
-                List.of(
-                        new AccountEntity(null, null, "Admin Account", AccountType.BUSINESS),
-                        new AccountEntity(null, null, "First Account", AccountType.PUBLIC),
-                        new AccountEntity(null, null, "Second Account", AccountType.PRIVATE),
-                        new AccountEntity(null, null, "Third Account", AccountType.BUSINESS)
+        Instant startTime = Instant.now(); // Start pomiaru czasu
+        Flux<AccountEntity> accountEntityFlux = Flux
+                .range(1, 1000)
+                .map(index -> new AccountEntity(
+                        null,
+                        null,
+                        "Admin Account " + index,
+                        index % 2 == 0 ? AccountType.BUSINESS : AccountType.PRIVATE)
                 )
-        );
+                .subscribeOn(Schedulers.parallel())
+                .flatMap(accountReactiveRepository::save)
+                .doOnError(Throwable::printStackTrace)
+                .doOnComplete(() -> {
+                    Instant endTime = Instant.now();
+                    Duration duration = Duration.between(startTime, endTime);
+                    log.info(MARKER, String.format("Accounts has been added to database in %s milliseconds", duration.toMillis()));
+                });
+
         StepVerifier.create(accountEntityFlux)
-                .expectNextCount(4)
+                .expectNextCount(1000)
                 .verifyComplete();
+
         log.info(MARKER, "Accounts has been added to database.");
     }
 }

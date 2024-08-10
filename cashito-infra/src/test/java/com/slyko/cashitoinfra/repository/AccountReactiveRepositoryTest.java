@@ -94,7 +94,7 @@ class AccountReactiveRepositoryTest {
         // THEN
         accountReactiveRepository.findAll()
                 .as(StepVerifier::create)
-                .expectNextCount(4)
+                .expectNextCount(1000)
                 .verifyComplete();
     }
 
@@ -108,7 +108,7 @@ class AccountReactiveRepositoryTest {
         Mono<Long> initialCount = accountReactiveRepository.count();
         Mono<long[]> finalCount = initialCount.flatMap(countBefore ->
                 accountReactiveRepository
-                        .findByName("First Account")
+                        .findByName("Admin Account 3")
                         .flatMap(accountEntity ->
                                 accountReactiveRepository.deleteById(accountEntity.getId())
                         )

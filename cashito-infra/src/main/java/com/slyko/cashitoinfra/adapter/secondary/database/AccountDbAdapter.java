@@ -35,7 +35,7 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
                 .handle((account, sink) -> {
                     // Optimistic locking: pre-check
                     if (version != null && !version.equals(account.getVersion())) {
-                        // The version are different, return an error
+                        // The version is different, return an error
                         sink.error(new UnexpectedDealVersionException(version, account.getVersion()));
                     } else {
                         Account api = AccountMapper.toApi(account);
