@@ -1,13 +1,12 @@
-package com.slyko.cashitoinfra.adapter.secondary;
+package com.slyko.cashitoinfra.adapter.secondary.database;
 
 import com.slyko.cashitoapplication.exception.AccountNotFoundException;
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitodomain.model.Account;
 import com.slyko.cashitodomain.port.out.AccountsSecondaryPort;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.AccountMapper;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.DealMapper;
-import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.mapper.AccountMapper;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.AccountReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -75,5 +74,20 @@ public class AccountDbAdapter implements AccountsSecondaryPort {
     @Override
     public Mono<Void> deleteById(UUID uuid, Long version) {
         // TODO add function for removing account id and all object which has relation to account
-        return null;    }
+        return null;
+    }
+
+    @Override
+    public Mono<Account> findByName(String accountName, boolean loadRelations) {
+        final Mono<Account> accountMono = accountReactiveRepository.findByName(accountName)
+                .switchIfEmpty(Mono.error(new AccountNotFoundException(accountName)))
+                .handle((account, sink) -> {
+                    Account api = AccountMapper.toApi(account);
+                    sink.next(api);
+                });
+        // Load the related objects, if requested
+        return loadRelations
+                ? accountMono // TODO add loadRelations
+                : accountMono;
+    }
 }

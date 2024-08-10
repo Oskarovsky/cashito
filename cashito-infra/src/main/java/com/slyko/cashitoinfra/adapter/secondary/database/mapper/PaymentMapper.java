@@ -1,7 +1,7 @@
-package com.slyko.cashitoinfra.adapter.secondary.mapper;
+package com.slyko.cashitoinfra.adapter.secondary.database.mapper;
 
 import com.slyko.cashitodomain.model.Payment;
-import com.slyko.cashitoinfra.adapter.secondary.entity.PaymentEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.PaymentEntity;
 
 public class PaymentMapper {
 

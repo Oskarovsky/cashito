@@ -1,4 +1,4 @@
-package com.slyko.cashitoinfra.adapter.secondary.entity;
+package com.slyko.cashitoinfra.adapter.secondary.database.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;

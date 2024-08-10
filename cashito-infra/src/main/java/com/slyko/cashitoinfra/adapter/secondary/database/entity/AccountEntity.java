@@ -1,4 +1,4 @@
-package com.slyko.cashitoinfra.adapter.secondary.entity;
+package com.slyko.cashitoinfra.adapter.secondary.database.entity;
 
 import com.slyko.cashitodomain.model.AccountType;
 import lombok.Getter;

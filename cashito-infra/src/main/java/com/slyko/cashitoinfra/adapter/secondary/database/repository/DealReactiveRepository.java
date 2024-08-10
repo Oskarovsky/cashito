@@ -1,7 +1,7 @@
-package com.slyko.cashitoinfra.adapter.secondary.repository;
+package com.slyko.cashitoinfra.adapter.secondary.database.repository;
 
 import com.slyko.cashitodomain.model.Status;
-import com.slyko.cashitoinfra.adapter.secondary.entity.DealEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.DealEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;

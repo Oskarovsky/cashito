@@ -1,7 +1,7 @@
-package com.slyko.cashitoinfra.adapter.secondary.mapper;
+package com.slyko.cashitoinfra.adapter.secondary.database.mapper;
 
 import com.slyko.cashitodomain.model.Product;
-import com.slyko.cashitoinfra.adapter.secondary.entity.ProductEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.ProductEntity;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

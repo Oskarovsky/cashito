@@ -1,7 +1,7 @@
-package com.slyko.cashitoinfra.adapter.secondary.mapper;
+package com.slyko.cashitoinfra.adapter.secondary.database.mapper;
 
 import com.slyko.cashitodomain.model.Account;
-import com.slyko.cashitoinfra.adapter.secondary.entity.AccountEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.AccountEntity;
 
 public class AccountMapper {
 

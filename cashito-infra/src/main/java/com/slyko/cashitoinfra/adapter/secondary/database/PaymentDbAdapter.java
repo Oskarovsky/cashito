@@ -1,9 +1,9 @@
-package com.slyko.cashitoinfra.adapter.secondary;
+package com.slyko.cashitoinfra.adapter.secondary.database;
 
 import com.slyko.cashitodomain.port.out.PaymentsSecondaryPort;
 import com.slyko.cashitodomain.model.Payment;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.PaymentMapper;
-import com.slyko.cashitoinfra.adapter.secondary.repository.PaymentReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.mapper.PaymentMapper;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.PaymentReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

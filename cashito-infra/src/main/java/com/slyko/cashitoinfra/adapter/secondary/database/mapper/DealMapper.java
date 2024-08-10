@@ -1,9 +1,9 @@
-package com.slyko.cashitoinfra.adapter.secondary.mapper;
+package com.slyko.cashitoinfra.adapter.secondary.database.mapper;
 
 import com.slyko.cashitodomain.model.Deal;
 import com.slyko.cashitodomain.model.Product;
-import com.slyko.cashitoinfra.adapter.secondary.entity.DealEntity;
-import com.slyko.cashitoinfra.adapter.secondary.entity.ProductEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.DealEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.ProductEntity;
 
 import java.util.List;
 import java.util.Optional;
