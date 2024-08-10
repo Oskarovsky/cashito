@@ -52,7 +52,7 @@ class ReactiveTest {
 
     @Test
     void shouldTestReactive() {
-        Mono<AccountEntity> accountEntityMono = accountReactiveRepository.findByName("Admin Account");
+        Mono<AccountEntity> accountEntityMono = accountReactiveRepository.findByName("Admin Account 1");
 
         accountReactiveRepository
                 .findByName("Admin Account")
