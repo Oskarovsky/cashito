@@ -1,9 +1,9 @@
-package com.slyko.cashitoinfra.adapter.secondary;
+package com.slyko.cashitoinfra.adapter.secondary.database;
 
 import com.slyko.cashitodomain.port.out.ProviderSecondaryPort;
 import com.slyko.cashitodomain.model.Provider;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.ProviderMapper;
-import com.slyko.cashitoinfra.adapter.secondary.repository.ProviderReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.mapper.ProviderMapper;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.ProviderReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

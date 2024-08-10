@@ -1,7 +1,7 @@
-package com.slyko.cashitoinfra.adapter.secondary.mapper;
+package com.slyko.cashitoinfra.adapter.secondary.database.mapper;
 
 import com.slyko.cashitodomain.model.Provider;
-import com.slyko.cashitoinfra.adapter.secondary.entity.ProviderEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.ProviderEntity;
 
 public class ProviderMapper {
 

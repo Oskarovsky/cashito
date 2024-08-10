@@ -2,10 +2,10 @@ package com.slyko.cashitoinfra;
 
 import com.slyko.cashitodomain.model.Account;
 import com.slyko.cashitodomain.model.AccountType;
-import com.slyko.cashitoinfra.adapter.secondary.entity.AccountEntity;
-import com.slyko.cashitoinfra.adapter.secondary.repository.AccountReactiveRepository;
-import com.slyko.cashitoinfra.adapter.secondary.repository.DealReactiveRepository;
-import com.slyko.cashitoinfra.adapter.secondary.repository.ProductReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.AccountEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.AccountReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.DealReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.ProductReactiveRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

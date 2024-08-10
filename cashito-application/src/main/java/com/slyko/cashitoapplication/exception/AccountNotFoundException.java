@@ -9,6 +9,10 @@ import java.util.UUID;
 public class AccountNotFoundException extends NotFoundException {
 
     public AccountNotFoundException(final UUID id) {
-        super("Account [%s] is not found".formatted(id));
+        super("Account [%s] is not found by UUID".formatted(id));
+    }
+
+    public AccountNotFoundException(final String name) {
+        super("Account [%s] is not found by name".formatted(name));
     }
 }

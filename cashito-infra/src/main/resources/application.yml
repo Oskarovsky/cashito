@@ -1,6 +1,17 @@
 spring:
   application:
     name: cashito-infra
+  kafka:
+    bootstrap-servers: localhost:29092
+    streams:
+      application-id: cashito
+      default:
+        key:
+          serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        value:
+          serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      input-topic: input-topic
+      output-topic: output-topic
 
   r2dbc:
     url: r2dbc:postgresql://localhost:5450/cashito

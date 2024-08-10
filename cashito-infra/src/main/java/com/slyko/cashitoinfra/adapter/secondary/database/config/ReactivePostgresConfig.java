@@ -1,4 +1,4 @@
-package com.slyko.cashitoinfra.adapter.secondary.config;
+package com.slyko.cashitoinfra.adapter.secondary.database.config;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.context.annotation.Bean;

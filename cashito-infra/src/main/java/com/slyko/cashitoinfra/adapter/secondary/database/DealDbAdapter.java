@@ -1,14 +1,14 @@
-package com.slyko.cashitoinfra.adapter.secondary;
+package com.slyko.cashitoinfra.adapter.secondary.database;
 
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitodomain.model.Deal;
 import com.slyko.cashitodomain.port.out.DealsSecondaryPort;
-import com.slyko.cashitoinfra.adapter.secondary.entity.ProductEntity;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.DealMapper;
-import com.slyko.cashitoinfra.adapter.secondary.mapper.ProductMapper;
-import com.slyko.cashitoinfra.adapter.secondary.repository.DealReactiveRepository;
-import com.slyko.cashitoinfra.adapter.secondary.repository.ProductReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.entity.ProductEntity;
+import com.slyko.cashitoinfra.adapter.secondary.database.mapper.DealMapper;
+import com.slyko.cashitoinfra.adapter.secondary.database.mapper.ProductMapper;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.DealReactiveRepository;
+import com.slyko.cashitoinfra.adapter.secondary.database.repository.ProductReactiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
