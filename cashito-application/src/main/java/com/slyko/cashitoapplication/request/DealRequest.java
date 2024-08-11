@@ -4,6 +4,7 @@ package com.slyko.cashitoapplication.request;
 import com.slyko.cashitodomain.model.Deal;
 import com.slyko.cashitodomain.model.Status;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,9 @@ public record DealRequest(
             name,
             Status.NEW,
             accountId,
-            products.stream().map(ProductRequest::toDomain).toList()
+            products != null
+                    ? products.stream().map(ProductRequest::toDomain).toList()
+                    : Collections.emptyList()
         );
     }
 
