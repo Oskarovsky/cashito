@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "name": "Initial deal",
-  "accountId": "0f0a4beb-4632-4fb5-90cc-47e67a5d3928",
+  "accountId": "8512544e-1417-41ff-9e60-3315d51c4b5d",
   "products": [
     {
       "name": "Towar Pierwszy",
@@ -81,3 +81,7 @@ If-Match: 0
 
 ### POST calculate cost of all products related to Deal
 GET http://localhost:8080/deal/d0e214c3-29cc-46c9-9d0c-9973c532abd1/cost
+
+
+### GET list of Products from Deal by UUID
+GET http://localhost:8080/deal/e5aedcf7-018e-4a6f-b2d8-760b22af9df0/relationships/products

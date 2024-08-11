@@ -3,8 +3,10 @@ package com.slyko.cashitoapplication.gateway;
 import com.slyko.cashitoapplication.request.DealProductsRequest;
 import com.slyko.cashitoapplication.request.DealRequest;
 import com.slyko.cashitoapplication.request.DealStatusRequest;
+import com.slyko.cashitodomain.model.Product;
 import com.slyko.cashitodomain.port.in.DealManagementPort;
 import com.slyko.cashitodomain.model.Deal;
+import com.slyko.cashitodomain.port.in.ProductManagementPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import static org.springframework.http.ResponseEntity.noContent;
 public class DealController {
 
     private final DealManagementPort dealManagementPort;
+    private final ProductManagementPort productManagementPort;
 
     @GetMapping
     public Flux<Deal> getDeals() {
@@ -81,11 +84,18 @@ public class DealController {
         return dealManagementPort.updateDealProducts(id, version, request.toDomain());
     }
 
-    @GetMapping(value = "{id}/cost")
+    @GetMapping(value = "/{id}/cost")
     public Mono<BigDecimal> getDealCost(
             @PathVariable final UUID id
     ) {
         return dealManagementPort.getDealCost(id);
+    }
+
+    @GetMapping(value = "/{id}/relationships/products")
+    public Flux<Product> getDealProducts(
+            @PathVariable final UUID id
+    ) {
+        return productManagementPort.getDealProducts(id);
     }
 
 }

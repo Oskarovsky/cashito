@@ -48,4 +48,11 @@ public class ProductDbAdapter implements ProductsSecondaryPort {
         return productReactiveRepository
                 .deleteById(uuid);
     }
+
+    @Override
+    public Flux<Product> getDealProducts(UUID dealId) {
+        return productReactiveRepository
+                .findByDealId(dealId)
+                .map(ProductMapper::toApi);
+    }
 }
