@@ -3,7 +3,7 @@ GET http://localhost:8080/product
 
 
 ### GET product by id
-GET http://localhost:8080/product/ca925563-53ae-4e89-8cc4-76410effef48
+GET http://localhost:8080/product/61f53c8b-c56d-419d-a37f-812830785fff
 
 
 ### POST create product
@@ -14,7 +14,7 @@ Content-Type: application/json
   "name": "Product Example Update",
   "productType": "BUSINESS",
   "cost": 32.39,
-  "dealId": "b7e12255-dc83-42b4-a6c2-09d1bf721445"
+  "dealId": "e5aedcf7-018e-4a6f-b2d8-760b22af9df0"
 }
 
 // 23c36975-6c30-40de-ad36-d35ea362cf46
