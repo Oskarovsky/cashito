@@ -1,7 +1,9 @@
 package com.slyko.cashitodomain.port.in;
 
 import com.slyko.cashitodomain.model.Deal;
+import com.slyko.cashitodomain.model.DealStatus;
 import com.slyko.cashitodomain.model.Payment;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
@@ -12,4 +14,5 @@ public abstract interface DealManagementPort extends BaseManagementPort<Deal, UU
     Mono<Deal> updateDealProducts(UUID id, Long version, Deal deal);
     Mono<BigDecimal> getDealCost(UUID id);
     Mono<Payment> payDeal(UUID dealId);
+    Flux<Deal> getDealsByStatus(DealStatus status);
 }

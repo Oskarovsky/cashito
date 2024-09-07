@@ -1,10 +1,8 @@
 package com.slyko.cashitoapplication.gateway;
 
 import com.slyko.cashitoapplication.request.AccountRequest;
-import com.slyko.cashitoapplication.request.DealRequest;
-import com.slyko.cashitodomain.model.Deal;
-import com.slyko.cashitodomain.port.in.AccountManagementPort;
 import com.slyko.cashitodomain.model.Account;
+import com.slyko.cashitodomain.port.in.AccountManagementPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

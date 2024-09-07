@@ -3,6 +3,7 @@ package com.slyko.cashitoinfra.adapter.secondary.database;
 import com.slyko.cashitoapplication.exception.DealNotFoundException;
 import com.slyko.cashitoapplication.exception.UnexpectedDealVersionException;
 import com.slyko.cashitodomain.model.Deal;
+import com.slyko.cashitodomain.model.DealStatus;
 import com.slyko.cashitodomain.port.out.DealsSecondaryPort;
 import com.slyko.cashitoinfra.adapter.secondary.database.entity.ProductEntity;
 import com.slyko.cashitoinfra.adapter.secondary.database.mapper.DealMapper;
@@ -184,6 +185,14 @@ public class DealDbAdapter implements DealsSecondaryPort {
                                 .collectList()
                 )
                 .map(t -> t.getT1().setProducts(t.getT2()))
+                .map(DealMapper::toApi);
+    }
+
+
+    @Override
+    public Flux<Deal> getDealsByStatus(DealStatus status) {
+        return dealReactiveRepository
+                .findByStatus(status)
                 .map(DealMapper::toApi);
     }
 }

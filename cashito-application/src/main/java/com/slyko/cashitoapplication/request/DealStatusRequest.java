@@ -2,14 +2,14 @@ package com.slyko.cashitoapplication.request;
 
 
 import com.slyko.cashitodomain.model.Deal;
-import com.slyko.cashitodomain.model.Status;
+import com.slyko.cashitodomain.model.DealStatus;
 
 import java.util.UUID;
 
 public record DealStatusRequest(
     UUID id,
     Long version,
-    Status status
+    DealStatus status
 ) {
     public Deal toDomain() {
         return new Deal(

@@ -1,10 +1,12 @@
 package com.slyko.cashitodomain.service;
 
 import com.slyko.cashitodomain.model.Deal;
+import com.slyko.cashitodomain.model.DealStatus;
 import com.slyko.cashitodomain.model.Payment;
 import com.slyko.cashitodomain.port.in.DealManagementPort;
 import com.slyko.cashitodomain.port.out.DealsSecondaryPort;
 import com.slyko.cashitodomain.util.UseCase;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
@@ -39,5 +41,10 @@ public class DealService extends BaseService<Deal, UUID> implements DealManageme
     @Override
     public Mono<Payment> payDeal(UUID dealId) {
         return null;
+    }
+
+    @Override
+    public Flux<Deal> getDealsByStatus(DealStatus status) {
+        return dealsSecondaryPort.getDealsByStatus(status);
     }
 }

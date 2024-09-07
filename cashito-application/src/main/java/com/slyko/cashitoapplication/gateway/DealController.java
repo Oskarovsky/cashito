@@ -3,6 +3,7 @@ package com.slyko.cashitoapplication.gateway;
 import com.slyko.cashitoapplication.request.DealProductsRequest;
 import com.slyko.cashitoapplication.request.DealRequest;
 import com.slyko.cashitoapplication.request.DealStatusRequest;
+import com.slyko.cashitodomain.model.DealStatus;
 import com.slyko.cashitodomain.model.Product;
 import com.slyko.cashitodomain.port.in.DealManagementPort;
 import com.slyko.cashitodomain.model.Deal;
@@ -98,4 +99,10 @@ public class DealController {
         return productManagementPort.getDealProducts(id);
     }
 
+    @GetMapping(value = "/status/{status}")
+    public Flux<Deal> getDealCost(
+            @PathVariable final DealStatus status
+    ) {
+        return dealManagementPort.getDealsByStatus(status);
+    }
 }

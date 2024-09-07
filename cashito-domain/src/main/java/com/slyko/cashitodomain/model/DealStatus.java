@@ -1,6 +1,6 @@
 package com.slyko.cashitodomain.model;
 
-public enum Status {
+public enum DealStatus {
     PAYMENT_EXPECTED,  
     PAID,  
     PREPARING,
