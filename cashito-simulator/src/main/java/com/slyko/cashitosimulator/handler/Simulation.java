@@ -10,8 +10,8 @@ import com.slyko.cashitosimulator.model.Deal;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Simulation {
 
@@ -24,23 +24,22 @@ public class Simulation {
     }
 
     public void run() throws IOException, InterruptedException, ExecutionException {
+        simulateAccounts();
         simulateDeals();
     }
 
-    private void simulateAccounts() throws IOException, InterruptedException, ExecutionException {
+    private void simulateAccounts() throws IOException, InterruptedException {
         // Create a new account
-        Account newAccount = accountApiClient.createAccount(new Account(null, null, "Account " + new Random().nextInt(1000), "BUSINESS"));
-        System.out.println("Created account: " + newAccount);
+        accountApiClient.createAccount(new Account(null, null, "Account " + new Random().nextInt(1000), "BUSINESS"));
 
         // Wait for a bit
         Thread.sleep(1000);
 
         // Get all accounts
         List<Account> accounts = accountApiClient.getAccounts();
-        System.out.println("Current accounts: " + accounts);
 
         // Update an account
-        if (!accounts.isEmpty()) {
+        if (false) {
             Account accountToUpdate = accounts.get(new Random().nextInt(accounts.size()));
             Account updatedAccount = accountApiClient.updateAccount(
                     accountToUpdate.getId(),
@@ -51,14 +50,16 @@ public class Simulation {
         }
     }
 
-    private void simulateDeals() throws IOException, InterruptedException, ExecutionException {
-        String accId = accountApiClient.getAccounts().get(2).getId();
-        System.out.println("DEEJYA -- > " + accId);
-
-        // Create new deal
-        Deal newDeal = dealApiClient.createDeal(new Deal(null, null, "Deal " + new Random().nextInt(1000), "NEW", accId, List.of()));
-        System.out.println("Created deal: " + newDeal);
-
+    private void simulateDeals() throws IOException, InterruptedException {
+        List<Account> accounts = accountApiClient.getAccounts();
+        if (!accounts.isEmpty()) {
+            Account randomAccount = accounts.get(ThreadLocalRandom.current().nextInt(accounts.size()));
+            // Create new deal
+            Deal newDeal = dealApiClient
+                    .createDeal(
+                            new Deal(null, null, "Deal " + new Random().nextInt(1000), "NEW", randomAccount.getId(), List.of()));
+            System.out.printf("Created deal: %s for account %s%n", newDeal, randomAccount.getId());
+        }
         // Wait for a bit
         Thread.sleep(1000);
     }
