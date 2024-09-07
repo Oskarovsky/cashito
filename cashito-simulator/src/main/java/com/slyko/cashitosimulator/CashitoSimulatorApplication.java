@@ -6,27 +6,38 @@ import com.slyko.cashitosimulator.handler.Simulation;
 import com.slyko.cashitosimulator.model.Account;
 
 import java.io.IOException;
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.*;
 
 public class CashitoSimulatorApplication {
 
-    public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         AccountApiClient accountApiClient = AccountApiClient.createClient();
         DealApiClient dealApiClient = DealApiClient.createClient();
         Simulation simulation = new Simulation(accountApiClient, dealApiClient);
 
 
         accountApiClient.createAccount(new Account(null, null, "ACC", "BUSINESS"));
-        // Start the simulation loop
-        while (true) {
-            try {
-                simulation.run();
-            } catch (Exception e) {
-                System.err.println("Failed to perform API operations: " + e.getMessage());
+
+        int threadCount = 10;
+        ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+        Random random = new Random();
+        Callable<Void> task = () -> {
+            while (true) {
+                try {
+                    simulation.run();
+                } catch (Exception e) {
+                    System.err.println("Failed to perform API operations: " + e.getMessage());
+                }
+                long delay = 1 + random.nextInt(41); // random value between 10 and 100
+                Thread.sleep(delay);
             }
-            Thread.sleep(10000);  // Delay for 10 seconds before retrying
-        }
+        };
+
+        executorService.invokeAll(List.of(task, task, task, task, task, task, task, task, task, task));
+        executorService.shutdown();
+        executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
     }
 
 }
