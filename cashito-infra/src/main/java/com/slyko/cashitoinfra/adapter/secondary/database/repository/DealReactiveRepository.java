@@ -1,6 +1,6 @@
 package com.slyko.cashitoinfra.adapter.secondary.database.repository;
 
-import com.slyko.cashitodomain.model.Status;
+import com.slyko.cashitodomain.model.DealStatus;
 import com.slyko.cashitoinfra.adapter.secondary.database.entity.DealEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,6 @@ import java.util.UUID;
 public abstract interface DealReactiveRepository extends ReactiveCrudRepository<DealEntity, UUID> {
 
     Mono<DealEntity> findById(UUID id);
-
-    Flux<DealEntity> findAllByStatus(Status status);
+    Flux<DealEntity> findByStatus(DealStatus dealStatus);
 
 }

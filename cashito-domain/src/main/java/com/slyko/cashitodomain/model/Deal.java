@@ -14,12 +14,12 @@ public non-sealed class Deal extends BaseApi {
     private UUID id;
     private Long version;
     private String title;
-    private Status status;
+    private DealStatus status;
     private UUID accountId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Product> products;
 
-    public Deal(UUID id, Long version, String title, Status status, UUID accountId, List<Product> products) {
+    public Deal(UUID id, Long version, String title, DealStatus status, UUID accountId, List<Product> products) {
         this.id = id;
         this.version = version;
         this.title = title;

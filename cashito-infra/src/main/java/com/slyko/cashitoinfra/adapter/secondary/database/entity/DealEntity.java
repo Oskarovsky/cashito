@@ -1,7 +1,7 @@
 package com.slyko.cashitoinfra.adapter.secondary.database.entity;
 
 import com.slyko.cashitodomain.model.Account;
-import com.slyko.cashitodomain.model.Status;
+import com.slyko.cashitodomain.model.DealStatus;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +28,7 @@ public class DealEntity extends BaseEntity {
     private String title;
 
     @Enumerated
-    private Status status;
+    private DealStatus status;
 
     private UUID accountId;
 
@@ -38,7 +38,7 @@ public class DealEntity extends BaseEntity {
     @Transient
     private List<ProductEntity> products;
 
-    public DealEntity(UUID id, Long version, String title, Status status, UUID accountId, List<ProductEntity> products) {
+    public DealEntity(UUID id, Long version, String title, DealStatus status, UUID accountId, List<ProductEntity> products) {
         super(id, LocalDateTime.now(), LocalDateTime.now());
         this.version = version;
         this.title = title;

@@ -2,7 +2,7 @@ package com.slyko.cashitoapplication.request;
 
 
 import com.slyko.cashitodomain.model.Deal;
-import com.slyko.cashitodomain.model.Status;
+import com.slyko.cashitodomain.model.DealStatus;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +12,7 @@ public record DealRequest(
     UUID id,
     Long version,
     String name,
-    Status status,
+    DealStatus status,
     UUID accountId,
     List<ProductRequest> products
 ) {
@@ -22,7 +22,7 @@ public record DealRequest(
             null,
             null,
             name,
-            Status.NEW,
+            DealStatus.NEW,
             accountId,
             products != null
                     ? products.stream().map(ProductRequest::toDomain).toList()

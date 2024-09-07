@@ -39,7 +39,7 @@ If-Match: 1
 }
 
 
-### PATCH change status of deal
+### PATCH change dealStatus of deal
 PATCH http://localhost:8080/deal/0b4abd0b-8a33-48c4-bae3-2b568c63234f/status
 Content-Type: application/json
 If-Match: 3
@@ -85,3 +85,8 @@ GET http://localhost:8080/deal/d0e214c3-29cc-46c9-9d0c-9973c532abd1/cost
 
 ### GET list of Products from Deal by UUID
 GET http://localhost:8080/deal/e5aedcf7-018e-4a6f-b2d8-760b22af9df0/relationships/products
+
+
+### GET list of Deals with specific status
+@status =PAID
+GET http://localhost:8080/deal/status/{{status}}
