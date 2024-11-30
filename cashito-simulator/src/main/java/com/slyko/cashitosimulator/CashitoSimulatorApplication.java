@@ -10,4 +10,5 @@ public class CashitoSimulatorApplication {
         SpringApplication.run(CashitoSimulatorApplication.class, args);
     }
 
+
 }
