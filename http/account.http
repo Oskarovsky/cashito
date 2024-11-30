@@ -1,13 +1,16 @@
+### Variables
+@baseUrl = http://localhost:8090
+
 ### GET list of accounts
-GET http://localhost:8080/account
+GET {{baseUrl}}/account
 
 
 ### GET account by id
-GET http://localhost:8080/account/a939d9be-6804-4cca-b7a4-477d15d50a40
+GET {{baseUrl}}/account/a939d9be-6804-4cca-b7a4-477d15d50a40
 
 
 ### POST create account
-POST http://localhost:8080/account
+POST {{baseUrl}}/account
 Content-Type: application/json
 
 {
@@ -16,7 +19,7 @@ Content-Type: application/json
 }
 
 ### PUT update account
-PUT http://localhost:8080/account/a939d9be-6804-4cca-b7a4-477d15d50a40
+PUT {{baseUrl}}/account/a939d9be-6804-4cca-b7a4-477d15d50a40
 Content-Type: application/json
 If-Match: 1
 

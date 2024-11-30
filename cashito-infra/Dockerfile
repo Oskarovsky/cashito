@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/cashito-infra-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port (replace 8080 with your app's port)
-EXPOSE 8080
+EXPOSE 8090
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
