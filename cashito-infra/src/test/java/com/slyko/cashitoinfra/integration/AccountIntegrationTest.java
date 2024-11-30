@@ -17,7 +17,6 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AccountIntegrationTest {

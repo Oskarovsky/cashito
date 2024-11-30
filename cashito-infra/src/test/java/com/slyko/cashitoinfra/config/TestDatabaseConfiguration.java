@@ -1,13 +1,11 @@
 package com.slyko.cashitoinfra.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 public class TestDatabaseConfiguration {
@@ -16,8 +14,8 @@ public class TestDatabaseConfiguration {
             .withUsername("admin")
             .withPassword("password")
             .withDatabaseName("test_cashito");
-
     static {
+        postgres.setPortBindings(List.of("5455:5432"));
         postgres.start();
     }
 
@@ -32,7 +30,7 @@ public class TestDatabaseConfiguration {
     private static String r2dbcUrl() {
         return String.format("r2dbc:postgresql://%s:%s/%s",
                 postgres.getContainerIpAddress(),
-                postgres.getMappedPort(PostgreSQLContainer.POSTGRESQL_PORT),
+                postgres.getMappedPort(5455),
                 postgres.getDatabaseName());
     }
 

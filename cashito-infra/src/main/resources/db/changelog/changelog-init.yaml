@@ -1,7 +1,13 @@
 databaseChangeLog:
-
   - changeSet:
-      id: 01-create-basic-entities
+      id: 01-prepare-db-config
+      author: slyko
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+  - changeSet:
+      id: 02-create-basic-entities
       author: slyko
       changes:
         - createTable:
