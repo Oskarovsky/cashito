@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <artifactId>cashito-infra</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>cashito-infra</name>
+    <description>cashito-infra</description>
+
     <parent>
         <groupId>com.slyko</groupId>
         <artifactId>cashito</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- Ścieżka do parent POM -->
     </parent>
-
-    <artifactId>cashito-infra</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>cashito-infra</name>
-    <description>cashito-infra</description>
 
     <properties>
         <java.version>21</java.version>

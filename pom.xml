@@ -14,6 +14,7 @@
         <module>cashito-domain</module>
         <module>cashito-application</module>
         <module>cashito-infra</module>
+        <module>cashito-simulator</module>
     </modules>
 
     <properties>

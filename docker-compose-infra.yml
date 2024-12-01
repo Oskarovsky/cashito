@@ -2,11 +2,11 @@ services:
   # ZooKeeper Instances
   zookeeper-1:
     image: zookeeper:latest
+    restart: always
+    hostname: zookeeper-1
     container_name: zookeeper-1
     ports:
       - "2181:2181"
-      - "2888:2888"
-      - "3888:3888"
     environment:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_TICK_TIME: 2000
@@ -17,11 +17,11 @@ services:
 
   zookeeper-2:
     image: zookeeper:latest
+    restart: always
+    hostname: zookeeper-2
     container_name: zookeeper-2
     ports:
       - "2182:2181"
-      - "2889:2888"
-      - "3889:3888"
     environment:
       ZOOKEEPER_SERVER_ID: 2
       ZOOKEEPER_TICK_TIME: 2000
@@ -32,11 +32,11 @@ services:
 
   zookeeper-3:
     image: zookeeper:latest
+    restart: always
+    hostname: zookeeper-3
     container_name: zookeeper-3
     ports:
       - "2183:2181"
-      - "2890:2888"
-      - "3890:3888"
     environment:
       ZOOKEEPER_SERVER_ID: 3
       ZOOKEEPER_TICK_TIME: 2000
@@ -84,6 +84,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
     networks:
       - cashito-network
+
   # Kafka UI for monitoring
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
