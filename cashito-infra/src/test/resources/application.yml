@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cashito-infra-test
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5455/test_cashito
+    username: admin
+    password: password
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/changelog-init.yaml
+    url: jdbc:postgresql://localhost:5455/test_cashito
+    user: admin
+    password: password

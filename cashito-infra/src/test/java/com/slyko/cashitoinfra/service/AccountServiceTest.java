@@ -9,6 +9,7 @@ import com.slyko.cashitoinfra.adapter.secondary.database.AccountDbAdapter;
 import com.slyko.cashitoinfra.adapter.secondary.database.entity.AccountEntity;
 import com.slyko.cashitoinfra.adapter.secondary.database.repository.AccountReactiveRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockitoAnnotations;

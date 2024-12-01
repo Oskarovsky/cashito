@@ -1,8 +1,13 @@
+server:
+  port: 8090
 spring:
   application:
     name: cashito-infra
   kafka:
-    bootstrap-servers: localhost:29092
+    bootstrap-servers:
+      - kafka1:9092
+      - kafka2:9093
+      - kafka3:9094
     streams:
       application-id: cashito
       default:

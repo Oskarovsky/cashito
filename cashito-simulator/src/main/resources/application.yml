@@ -1,0 +1,14 @@
+server:
+  port: 8066
+spring:
+  kafka:
+    bootstrap-servers: kafka1:29092,kafka2:39092,kafka3:49092
+    consumer:
+      group-id: cashito-group
+      properties:
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      properties:
+        key.serializer: org.apache.kafka.common.serialization.StringSerializer
+        value.serializer: org.apache.kafka.common.serialization.StringSerializer

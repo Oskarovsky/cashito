@@ -8,6 +8,7 @@ import com.slyko.cashitoinfra.adapter.secondary.database.repository.AccountReact
 import com.slyko.cashitoinfra.adapter.secondary.database.repository.DealReactiveRepository;
 import com.slyko.cashitoinfra.adapter.secondary.database.repository.ProductReactiveRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
