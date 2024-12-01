@@ -7,7 +7,7 @@
         <groupId>com.slyko</groupId>
         <artifactId>cashito</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- Ścieżka do parent POM -->
     </parent>
 
     <artifactId>cashito-application</artifactId>
@@ -24,6 +24,7 @@
             <groupId>com.slyko</groupId>
             <artifactId>cashito-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

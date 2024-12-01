@@ -10,13 +10,18 @@
     <packaging>pom</packaging>
     <description>cashito</description>
 
+    <modules>
+        <module>cashito-domain</module>
+        <module>cashito-application</module>
+        <module>cashito-infra</module>
+    </modules>
+
     <properties>
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <springdoc.version>2.6.0</springdoc.version>
         <lombok.version>1.18.32</lombok.version>
-
     </properties>
 
     <dependencyManagement>
