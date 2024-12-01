@@ -109,22 +109,6 @@ services:
     networks:
       - cashito-network
 
-#  cashito-infra:
-#    build:
-#      context: ./cashito-infra
-#      dockerfile: Dockerfile
-#    depends_on:
-#      - kafka-1
-#      - kafka-2
-#      - kafka-3
-#    environment:
-#      SPRING_PROFILES_ACTIVE: docker
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9093,kafka-3:9094
-#    ports:
-#      - "8090:8090"
-#    networks:
-#      - cashito-network
-
 networks:
   cashito-network:
     driver: bridge
